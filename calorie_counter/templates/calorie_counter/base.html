@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            title is provided by inheriting templates
+        {% endblock %}
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if IE]><script
+      src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
+    </script><![endif]-->
+</head>
+
+<body>
+
+<div><!-- start of container -->
+    <header>
+        <h1>Calorie Counter</h1>
+        <h2>Calorie Tracking System</h2>
+    </header>
+
+    <main>
+        {% block content %}
+            This is default content!
+        {% endblock %}
+    </main>
+</div><!-- end of container -->
+
+<footer>
+    <p>
+        No footer yet.
+    </p>
+</footer>
+
+</body>
+</html>
+
