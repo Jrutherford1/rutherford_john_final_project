@@ -13,7 +13,6 @@ class MealLog(models.Model):
         return '%s' % self.meal_log_id
 
 
-
 class Meal(models.Model):
     meal_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
@@ -80,8 +79,8 @@ class Member(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     e_mail = models.CharField(max_length=50)
-    height = models.IntegerField()
-    weight = models.IntegerField()
+    height = models.IntegerField(help_text="Height in feet and inches")
+    weight = models.IntegerField(help_text="Weight in pounds")
     age = models.IntegerField()
     sex = models.CharField(max_length=1)
     calorie_goal = models.ForeignKey(CalorieGoal, related_name='members', on_delete=models.PROTECT)
