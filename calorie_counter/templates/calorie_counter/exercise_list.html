@@ -1,0 +1,18 @@
+{%  extends 'calorie_counter/base.html' %}
+<html lang="en">
+
+{%  block title %}
+    Exercise List
+{%  endblock %}
+
+{%  block content %}
+    <ul>
+        {% for exercise in exercise_list %}
+            <li>
+                <a href=""> {{ exercise }} </a>
+            </li>
+        {%  empty   %}
+            <li><em>There are currently no exercises.</em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

@@ -1,0 +1,18 @@
+{%  extends 'calorie_counter/base.html' %}
+<html lang="en">
+
+{%  block title %}
+   Daily Macro Goal List
+{%  endblock %}
+
+{%  block content %}
+    <ul>
+        {% for daily_macro_goal in daily_macro_goal_list %}
+            <li>
+                <a href=""> {{ daily_macro_goal }} </a>
+            </li>
+        {%  empty   %}
+            <li><em>There are currently no daily macro goals.</em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

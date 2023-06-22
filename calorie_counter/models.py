@@ -56,7 +56,7 @@ class CalorieGoal(models.Model):
     calorie_goal_id = models.AutoField(primary_key=True)
     target_calories = models.IntegerField()
     begin_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(null=True)
 
     def __str__(self):
         return '%s' % self.calorie_goal_id
@@ -75,19 +75,21 @@ class Food(models.Model):
 
 
 class Member(models.Model):
+    SEX_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+    ]
     member_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    e_mail = models.CharField(max_length=50)
-    height = models.IntegerField(help_text="Height in feet and inches")
+    e_mail = models.EmailField(max_length=50)
+    height = models.IntegerField(help_text="Height in inches")
     weight = models.IntegerField(help_text="Weight in pounds")
-    age = models.IntegerField()
-    sex = models.CharField(max_length=1)
-    calorie_goal = models.ForeignKey(CalorieGoal, related_name='members', on_delete=models.PROTECT)
+    age = models.IntegerField(help_text="Age in years")
+    sex = models.CharField(help_text="Male = M, Female = F",   max_length=1, choices=SEX_CHOICES)
+    calorie_goal = models.ForeignKey(CalorieGoal, related_name='members', on_delete=models.PROTECT, null=True)
     daily_macro_goal = models.ForeignKey(DailyMacroGoal, related_name='members', on_delete=models.PROTECT)
     date_joined = models.DateField()
-    meal_log = models.ForeignKey(MealLog, related_name='members', on_delete=models.PROTECT)
-    exercise_log = models.ForeignKey(ExerciseLog, related_name='members', on_delete=models.PROTECT)
 
     def __str__(self):
         return '%s' % self.last_name

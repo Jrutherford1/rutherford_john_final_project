@@ -1,0 +1,18 @@
+{%  extends 'calorie_counter/base.html' %}
+<html lang="en">
+
+{%  block title %}
+    Meal Log List
+{%  endblock %}
+
+{%  block content %}
+    <ul>
+        {% for meal_log in meal_log_list %}
+            <li>
+                <a href=""> {{ meal_log }} </a>
+            </li>
+        {%  empty   %}
+            <li><em>There are currently no meal logs.</em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

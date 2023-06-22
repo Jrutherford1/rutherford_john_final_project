@@ -14,14 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from django.contrib import admin
-from django.urls import path, include
+
+from django.urls import path
 from calorie_counter.views import (
     member_list_view, food_list_view, meal_list_view, meal_log_list_view, exercise_log_list_view,
     calorie_goal_list_view, exercise_list_view, daily_macro_goal_list_view,
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('calorie_counter.urls')),
+    path('member/', member_list_view, name='member_list'),
+    path('food/', food_list_view, name='food_list'),
+    path('meal/', meal_list_view, name='meal_list'),
+    path('meallog/', meal_log_list_view, name='meal_log_list'),
+    path('exerciselog/', exercise_log_list_view, name='exercise_log_list'),
+    path('dailymacrogoal/', daily_macro_goal_list_view, name='daily_macro_goal_list'),
+    path('caloriegoal/', calorie_goal_list_view, name='calorie_goal_list'),
+    path('exercise/', exercise_list_view, name='exercise_list'),
+
+
 ]
