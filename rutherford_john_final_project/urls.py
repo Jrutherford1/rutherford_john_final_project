@@ -16,10 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from calorie_counter.views import (
-    member_list_view, food_list_view, meal_list_view, meal_log_list_view, exercise_log_list_view,
-    calorie_goal_list_view, exercise_list_view, daily_macro_goal_list_view,
-)
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

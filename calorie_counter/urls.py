@@ -17,19 +17,44 @@ Including another URLconf
 
 from django.urls import path
 from calorie_counter.views import (
-    member_list_view, food_list_view, meal_list_view, meal_log_list_view, exercise_log_list_view,
-    calorie_goal_list_view, exercise_list_view, daily_macro_goal_list_view,
+    FoodList,
+    MemberList,
+    MealList,
+    MealLogList,
+    ExerciseLogList,
+    DailyMacroGoalList,
+    CalorieGoalList,
+    ExerciseList,
 )
 
 urlpatterns = [
-    path('member/', member_list_view, name='member_list'),
-    path('food/', food_list_view, name='food_list'),
-    path('meal/', meal_list_view, name='meal_list'),
-    path('meallog/', meal_log_list_view, name='meal_log_list'),
-    path('exerciselog/', exercise_log_list_view, name='exercise_log_list'),
-    path('dailymacrogoal/', daily_macro_goal_list_view, name='daily_macro_goal_list'),
-    path('caloriegoal/', calorie_goal_list_view, name='calorie_goal_list'),
-    path('exercise/', exercise_list_view, name='exercise_list'),
+    path('member/',
+             MemberList.as_view(),
+             name='calorie_counter_member_list_urlpattern'),
+
+    path('food/',
+             FoodList.as_view(),
+             name='calorie_counter_food_list_urlpattern'),
 
 
-]
+
+    path('meallog/',
+             MealLogList.as_view(),
+             name='calorie_counter_meallog_list_urlpattern'),
+
+    path('exerciselog/',
+             ExerciseLogList.as_view(),
+             name='calorie_counter_exerciselog_list_urlpattern'),
+
+    path('dailymacrogoal/',
+             DailyMacroGoalList.as_view(),
+             name='calorie_counter_dailymacrogoal_list_urlpattern'),
+
+    path('caloriegoal/',
+             CalorieGoalList.as_view(),
+             name='calorie_counter_caloriegoal_list_urlpattern'),
+
+    path('exercise/',
+             ExerciseList.as_view(),
+             name='calorie_counter_exercise_list_urlpattern'),
+   ]
