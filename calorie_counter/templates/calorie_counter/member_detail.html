@@ -1,0 +1,68 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Member - {{ first_name }}
+{% endblock %}
+
+{% block content %}
+    <h2>Member Detail</h2>
+
+    <section>
+        <table>
+            <tr>
+                <th>First Name:</th>
+                <td>{{ member_detail.first_name}}</td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td>{{ member_detail.last_name }}</td>
+            </tr>
+            {% if member.disambiguator %}
+                <tr>
+                    <th>Disambiguator:</th>
+                    <td>{{ member.disambiguator }}</td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Height (Inches):</th>
+                <td>{{ member_detail.height }}</td>
+            </tr>
+            <tr>
+                <th>Weight (Lbs):</th>
+                <td>{{ member_detail.weight }}</td>
+            </tr>
+            <tr>
+                <th>Sex:</th>
+                <td>{{ member_detail.sex}}</td>
+            </tr>
+            <tr>
+                <th>Date Joined:</th>
+                <td>{{ member_detail.date_joined }}</td>
+            </tr>
+
+        </table>
+    </section>
+
+     <h3>Meals SECTION NOT WORKING</h3>
+        <section>
+            <ul>
+                {% for meal_log in meal_type.meal_log_list.all %}
+                    <li>{{ meal_type }}</li>
+                {% empty %}
+                    <li><em>This member has no meals.</em></li>
+                {% endfor %}
+            </ul>
+        </section>
+        <h3>Registrations</h3>
+        <section>
+            <ul>
+                {% for registration in student.registrations.all %}
+                    <li>{{ registration }}</li>
+                {% empty %}
+                    <li><em>This student has no registrations.</em></li>
+                {% endfor %}
+            </ul>
+        </section>
+        </section>
+
+{% endblock %}

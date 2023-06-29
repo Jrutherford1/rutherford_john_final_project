@@ -6,10 +6,11 @@
 {%  endblock %}
 
 {%  block content %}
+     <h2>Exercise List:</h2>
     <ul>
         {% for exercise in exercise_list %}
             <li>
-                <a href=""> {{ exercise }} </a>
+                <a href="{{ exercise.get_absolute_url }}"> {{ exercise }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no exercises.</em></li>

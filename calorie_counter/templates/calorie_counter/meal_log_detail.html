@@ -1,0 +1,39 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Meal Log - {{ meal_log_detail }}
+{% endblock %}
+
+{% block content %}
+    <h2>Meal Log Detail</h2>
+
+    <section>
+        <table>
+            <tr>
+                <th>Meal Type:</th>
+                <td>{{ meal_log.meal_type }}</td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td>{{ meal_log.date }}</td>
+            </tr>
+            <tr>
+                <th>Time:</th>
+                <td>{{ meal_log.time }}</td>
+            </tr>
+
+        </table>
+    </section>
+    <h3>List of Foods: SECTION NOT WORKING</h3>
+        <section>
+            <ul>
+                {% for registration in student.registrations.all %}
+                    <li>{{ registration }}</li>
+                {% empty %}
+                    <li><em>This student has no registrations.</em></li>
+                {% endfor %}
+            </ul>
+        </section>
+
+
+{% endblock %}

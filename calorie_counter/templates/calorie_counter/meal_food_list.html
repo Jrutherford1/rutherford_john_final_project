@@ -2,17 +2,17 @@
 <html lang="en">
 
 {%  block title %}
-    Food List
+    Meal Food List
 {%  endblock %}
 
 {%  block content %}
     <ul>
-        {% for food in food_list %}
+        {% for meal_food in meal_food_list %}
             <li>
-                <a href="{{ food.get_absolute_url }}"> {{ food }} </a>
+                <a href="{{ meal_food.get_absolute_url }}"> {{ meal_food }} </a>
             </li>
         {%  empty   %}
-            <li><em>There are currently no foods.</em></li>
+            <li><em>There are currently no meal_foods.</em></li>
         {% endfor %}
     </ul>
 {%  endblock %}

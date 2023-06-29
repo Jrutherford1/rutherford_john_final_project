@@ -7,9 +7,9 @@
 
 {%  block content %}
     <ul>
-        {% for calorie in calorie_goal_list %}
+        {% for calorie_goal in calorie_goal_list %}
             <li>
-                <a href=""> {{ calorie_goal }} </a>
+                <a href="{{ calorie_goal.get_absolute_url }}"> {{ calorie_goal }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no calorie goals.</em></li>

@@ -9,7 +9,7 @@
     <ul>
         {% for daily_macro_goal in daily_macro_goal_list %}
             <li>
-                <a href=""> {{ daily_macro_goal }} </a>
+                <a href="{{ daily_macro_goal.get_absolute_url }}"> {{ daily_macro_goal }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no daily macro goals.</em></li>

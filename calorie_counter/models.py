@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import UniqueConstraint
+from django.urls import reverse
 
 
 class Food(models.Model):
@@ -12,6 +12,11 @@ class Food(models.Model):
 
     def __str__(self):
         return '%s' % self.name
+
+    def get_absolute_url(self):
+        return reverse('calorie_counter_food_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         constraints = [
@@ -33,8 +38,13 @@ class MealLog(models.Model):
     meal_type = models.CharField(max_length=50, choices=MEAL_CHOICES)
     member = models.ForeignKey('Member', related_name='meal_logs', on_delete=models.PROTECT)
 
+    def get_absolute_url(self):
+        return reverse('calorie_counter_meal_log_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     def __str__(self):
-        return 'Meal Log %s for %s' % (self.id, self.member)
+        return '%s for %s on %s' % (self.meal_type, self.member, self.date)
 
 
 class MealFood(models.Model):
@@ -42,8 +52,13 @@ class MealFood(models.Model):
     food = models.ForeignKey(Food, related_name='meal_foods', on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=5, decimal_places=2, help_text="Serving size:")
 
+    def get_absolute_url(self):
+        return reverse('calorie_counter_meal_food_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     def __str__(self):
-        return "%s in %s" % (self.food.name, self.meal_log.meal_type)
+        return "%s in %s" % (self.food, self.quantity)
 
 
 class ExerciseLog(models.Model):
@@ -53,8 +68,13 @@ class ExerciseLog(models.Model):
     member = models.ForeignKey('Member', related_name='exercise_logs', on_delete=models.CASCADE)
     exercise = models.ForeignKey('Exercise', related_name='exercise_logs', on_delete=models.PROTECT)
 
+    def get_absolute_url(self):
+        return reverse('calorie_counter_exercise_log_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     def __str__(self):
-        return 'Exercise Log %s for %s on %s' % (self.id, self.member, self.date)
+        return 'Exercise Log: %s on %s' % ( self.member, self.date )
 
 
 class Exercise(models.Model):
@@ -71,6 +91,11 @@ class Exercise(models.Model):
     def __str__(self):
         return '%s' % self.exercise_type
 
+    def get_absolute_url(self):
+        return reverse('calorie_counter_exercise_detail_urlpattern',
+                        kwargs={'pk': self.pk}
+                        )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['exercise_type'], name='unique_exercise')
@@ -85,6 +110,11 @@ class DailyMacroGoal(models.Model):
     fat_goal = models.IntegerField()
     date = models.DateField()
 
+    def get_absolute_url(self):
+        return reverse('calorie_counter_daily_macro_goal_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     def __str__(self):
         return 'Macro goal for %s on %s' % (self.member, self.date)
 
@@ -95,6 +125,11 @@ class CalorieGoal(models.Model):
     target_calories = models.IntegerField()
     begin_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('calorie_counter_calorie_goal_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     def __str__(self):
        return '%s calories goal for %s' % (self.target_calories, self.member)
@@ -114,9 +149,21 @@ class Member(models.Model):
     age = models.IntegerField(help_text="Age in years")
     sex = models.CharField(help_text="Male = M, Female = F", max_length=1, choices=SEX_CHOICES)
     date_joined = models.DateField()
+    disambiguator = models.CharField(max_length=45, blank=True, default='')
+
 
     def __str__(self):
-        return '%s / %s' % (self.first_name, self.last_name)
+        result = ''
+        if self.disambiguator == '':
+            result = '%s %s ' % (self.first_name, self.last_name)
+        else:
+            result = '%s, %s (%s)' % (self.first_name, self.last_name, self.disambiguator)
+        return result
+
+    def get_absolute_url(self):
+        return reverse('calorie_counter_member_detail_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
 
     class Meta:
         constraints = [

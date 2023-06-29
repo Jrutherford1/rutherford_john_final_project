@@ -2,14 +2,15 @@
 <html lang="en">
 
 {%  block title %}
-    Member List
+
 {%  endblock %}
 
 {%  block content %}
+    <h2> Member List </h2>
     <ul>
         {% for member in member_list %}
             <li>
-                <a href=""> {{ member }} </a>
+                <a href="{{ member.get_absolute_url }}"> {{ member }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no members.</em></li>

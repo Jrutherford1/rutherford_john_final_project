@@ -19,12 +19,20 @@ from django.urls import path
 from calorie_counter.views import (
     FoodList,
     MemberList,
-    MealList,
+    MealFoodList,
     MealLogList,
     ExerciseLogList,
     DailyMacroGoalList,
     CalorieGoalList,
     ExerciseList,
+    MemberDetail,
+    MealLogDetail,
+    FoodDetail,
+    ExerciseLogDetail,
+    MealFoodDetail,
+    ExerciseDetail,
+    DailyMacroGoalDetail,
+    CalorieGoalDetail,
 )
 
 urlpatterns = [
@@ -32,29 +40,63 @@ urlpatterns = [
              MemberList.as_view(),
              name='calorie_counter_member_list_urlpattern'),
 
+    path('member/<int:pk>/',
+            MemberDetail.as_view(),
+            name='calorie_counter_member_detail_urlpattern'),
+
     path('food/',
              FoodList.as_view(),
              name='calorie_counter_food_list_urlpattern'),
 
-
+    path('food/<int:pk>/',
+                FoodDetail.as_view(),
+                name='calorie_counter_food_detail_urlpattern'),
 
     path('meallog/',
              MealLogList.as_view(),
-             name='calorie_counter_meallog_list_urlpattern'),
+             name='calorie_counter_meal_log_list_urlpattern'),
+
+    path('meallog/<int:pk>/',
+            MealLogDetail.as_view(),
+            name='calorie_counter_meal_log_detail_urlpattern'),
 
     path('exerciselog/',
              ExerciseLogList.as_view(),
-             name='calorie_counter_exerciselog_list_urlpattern'),
+             name='calorie_counter_exercise_log_list_urlpattern'),
+
+    path('exerciselog/<int:pk>/',
+            ExerciseLogDetail.as_view(),
+            name='calorie_counter_exercise_log_detail_urlpattern'),
 
     path('dailymacrogoal/',
              DailyMacroGoalList.as_view(),
-             name='calorie_counter_dailymacrogoal_list_urlpattern'),
+             name='calorie_counter_daily_macro_goal_list_urlpattern'),
+
+    path('dailymacrogoal/<int:pk>/',
+            DailyMacroGoalDetail.as_view(),
+            name='calorie_counter_daily_macro_goal_detail_urlpattern'),
 
     path('caloriegoal/',
              CalorieGoalList.as_view(),
              name='calorie_counter_caloriegoal_list_urlpattern'),
 
+    path('caloriegoal/<int:pk>/',
+            CalorieGoalDetail.as_view(),
+            name='calorie_counter_calorie_goal_detail_urlpattern'),
+
     path('exercise/',
              ExerciseList.as_view(),
              name='calorie_counter_exercise_list_urlpattern'),
+
+    path('exercise/<int:pk>/',
+            ExerciseDetail.as_view(),
+            name='calorie_counter_exercise_detail_urlpattern'),
+
+    path('mealfood/',
+             MealFoodList.as_view(),
+             name='calorie_counter_mealfood_list_urlpattern'),
+
+    path('mealfood/<int:pk>/',
+            MealFoodDetail.as_view(),
+            name='calorie_counter_meal_food_detail_urlpattern'),
    ]

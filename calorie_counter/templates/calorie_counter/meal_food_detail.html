@@ -1,0 +1,25 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Exercise Log - {{ meal_food }}
+{% endblock %}
+
+{% block content %}
+    <h1>Meal Food Detail</h1>
+
+    <section>
+        <table>
+            <tr>
+                <th>Food:</th>
+                <td>{{ meal_food_detail.food }}</td>
+            </tr>
+            <tr>
+                <th>Quantity:</th>
+                <td>{{ meal_food_detail.quantity }}</td>
+            </tr>
+
+        </table>
+    </section>
+
+
+{% endblock %}

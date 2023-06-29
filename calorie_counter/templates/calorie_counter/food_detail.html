@@ -1,0 +1,33 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Food - {{ food }}
+{% endblock %}
+
+{% block content %}
+    <h2>{{ food.name }}</h2>
+
+    <section>
+        <table>
+
+            <tr>
+                <th>Calories Per Serving:</th>
+                <td>{{ food.calories_per_serving }}</td>
+            </tr>
+            <tr>
+                <th>Protein (grams):</th>
+                <td>{{ food.protein_grams }}</td>
+            </tr>
+            <tr>
+                <th>Carbohydrates (grams):</th>
+                <td>{{ food.carbohydrates_grams }}</td>
+            </tr>
+            <tr>
+                <th>Fat (grams):</th>
+                <td>{{ food.fat_grams }}</td>
+            </tr>
+        </table>
+    </section>
+
+
+{% endblock %}

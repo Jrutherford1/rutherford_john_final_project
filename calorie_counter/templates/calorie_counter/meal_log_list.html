@@ -9,7 +9,7 @@
     <ul>
         {% for meal_log in meal_log_list %}
             <li>
-                <a href=""> {{ meal_log }} </a>
+                <a href="{{ meal_log.get_absolute_url }}"> {{ meal_log }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no meal logs.</em></li>

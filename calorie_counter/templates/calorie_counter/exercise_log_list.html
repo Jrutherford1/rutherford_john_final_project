@@ -9,7 +9,7 @@
     <ul>
         {% for exercise in exercise_log_list %}
             <li>
-                <a href=""> {{ exercise_log_list }} </a>
+                <a href="{{ exercise.get_absolute_url }}"> {{ exercise }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no exercise log.</em></li>
