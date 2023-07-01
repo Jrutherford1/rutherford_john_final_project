@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 
+
 from calorie_counter.models import Member
 from calorie_counter.models import DailyMacroGoal
 from calorie_counter.models import Food
@@ -9,6 +10,15 @@ from calorie_counter.models import Exercise
 from calorie_counter.models import ExerciseLog
 from calorie_counter.models import CalorieGoal
 from calorie_counter.models import MealFood
+from calorie_counter.utils import ObjectCreateMixin
+from calorie_counter.forms import MemberForm
+from calorie_counter.forms import DailyMacroGoalForm
+from calorie_counter.forms import FoodForm
+from calorie_counter.forms import MealLogForm
+from calorie_counter.forms import ExerciseForm
+from calorie_counter.forms import ExerciseLogForm
+from calorie_counter.forms import CalorieGoalForm
+from calorie_counter.forms import MealFoodForm
 
 
 class MemberList(View):
@@ -32,6 +42,10 @@ class MemberDetail(View):
         )
 
 
+class MemberCreate(ObjectCreateMixin, View):
+    form_class = MemberForm
+    template_name = 'calorie_counter/member_form.html'
+
 
 class DailyMacroGoalList(View):
 
@@ -42,6 +56,7 @@ class DailyMacroGoalList(View):
             {'daily_macro_goal_list': DailyMacroGoal.objects.all()}
         )
 
+
 class DailyMacroGoalDetail(View):
     def get(self, request, pk):
         daily_macro_goal = get_object_or_404(DailyMacroGoal, pk=pk)
@@ -51,6 +66,11 @@ class DailyMacroGoalDetail(View):
             {'daily_macro_goal': daily_macro_goal,
              }
         )
+
+
+class DailyMacroGoalCreate(ObjectCreateMixin, View):
+    form_class = DailyMacroGoalForm
+    template_name = 'calorie_counter/daily_macro_goal_form.html'
 
 
 class FoodList(View):
@@ -72,6 +92,10 @@ class FoodDetail(View):
              }
         )
 
+class FoodCreate(ObjectCreateMixin, View):
+    form_class = FoodForm
+    template_name = 'calorie_counter/food_form.html'
+
 
 class MealFoodList(View):
 
@@ -92,6 +116,10 @@ class MealFoodDetail(View):
             {'meal_food_detail': meal_food_detail,
              }
         )
+
+class MealFoodCreate(ObjectCreateMixin, View):
+    form_class = MealFoodForm
+    template_name = 'calorie_counter/meal_food_form.html'
 
 
 class MealLogList(View):
@@ -115,6 +143,11 @@ class MealLogDetail(View):
         )
 
 
+class MealLogCreate(ObjectCreateMixin, View):
+    form_class = MealLogForm
+    template_name = 'calorie_counter/meal_log_form.html'
+
+
 class ExerciseList(View):
 
     def get(self, request):
@@ -134,6 +167,11 @@ class ExerciseDetail(View):
             {'exercise': exercise,
              }
         )
+
+
+class ExerciseCreate(ObjectCreateMixin, View):
+    form_class = ExerciseForm
+    template_name = 'calorie_counter/exercise_form.html'
 
 
 class ExerciseLogList(View):
@@ -157,6 +195,11 @@ class ExerciseLogDetail(View):
         )
 
 
+class ExerciseLogCreate(ObjectCreateMixin, View):
+    form_class = ExerciseLogForm
+    template_name = 'calorie_counter/exercise_log_form.html'
+
+
 class CalorieGoalList(View):
 
     def get(self, request):
@@ -178,3 +221,6 @@ class CalorieGoalDetail(View):
         )
 
 
+class CalorieGoalCreate(ObjectCreateMixin, View):
+    form_class = CalorieGoalForm
+    template_name = 'calorie_counter/calorie_goal_form.html'
