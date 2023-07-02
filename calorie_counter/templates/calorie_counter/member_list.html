@@ -7,6 +7,11 @@
 
 {%  block content %}
     <h2> Member List </h2>
+    <ul>
+        <li>
+            <a href="{{ member.get_update_url }}"> Edit Member</a>
+        </li>
+    </ul>
     <div>
         <a href="{% url 'calorie_counter_member_create_urlpattern' %}"> Add a new member </a>
     </div>

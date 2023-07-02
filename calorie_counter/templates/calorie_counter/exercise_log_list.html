@@ -7,6 +7,11 @@
 
 {%  block content %}
     <h2> Exercise Log List </h2>
+    <ul>
+        <li>
+            <a href="{{ exercise_log.get_update_url }}"> Edit Exercise Log</a>
+        </li>
+    </ul>
     <div>
         <a href="{% url 'calorie_counter_exercise_log_create_urlpattern' %}"> Add a new exercise log </a>
     </div>

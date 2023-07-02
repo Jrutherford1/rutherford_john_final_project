@@ -1,0 +1,15 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Update Exercise Log
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ exercise_log.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Update Exercise Log</button>
+    </form>
+{% endblock %}
