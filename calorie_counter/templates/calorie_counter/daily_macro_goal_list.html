@@ -6,6 +6,10 @@
 {%  endblock %}
 
 {%  block content %}
+    <h2> Daily Macro Goal List </h2>
+    <div>
+        <a href="{% url 'calorie_counter_daily_macro_goal_create_urlpattern' %}"> Add a new daily macro goal </a>
+    </div>
     <ul>
         {% for daily_macro_goal in daily_macro_goal_list %}
             <li>

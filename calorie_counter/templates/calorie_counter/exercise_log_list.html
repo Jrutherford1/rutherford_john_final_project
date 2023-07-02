@@ -6,6 +6,10 @@
 {%  endblock %}
 
 {%  block content %}
+    <h2> Exercise Log List </h2>
+    <div>
+        <a href="{% url 'calorie_counter_exercise_log_create_urlpattern' %}"> Add a new exercise log </a>
+    </div>
     <ul>
         {% for exercise in exercise_log_list %}
             <li>

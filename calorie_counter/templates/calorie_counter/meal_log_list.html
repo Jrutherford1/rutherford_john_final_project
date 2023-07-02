@@ -6,6 +6,10 @@
 {%  endblock %}
 
 {%  block content %}
+    <h2> Meal Log List </h2>
+    <div>
+        <a href="{% url 'calorie_counter_meal_log_create_urlpattern' %}"> Add a new meal log. </a>
+    </div>
     <ul>
         {% for meal_log in meal_log_list %}
             <li>

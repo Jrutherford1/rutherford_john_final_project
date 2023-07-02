@@ -22,7 +22,34 @@
         <h1>Calorie Counter</h1>
         <h2>Calorie Tracking System</h2>
     </header>
-
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'calorie_counter_member_list_urlpattern' %}">
+                    Members</a></li>
+            <li>
+                <a href="{% url 'calorie_counter_daily_macro_goal_list_urlpattern' %}">
+                    Macro Goals</a></li>
+            <li>
+                <a href="{% url 'calorie_counter_food_list_urlpattern' %}">
+                    Foods</a></li>
+            <li>
+                <a href="{% url 'calorie_counter_meal_food_list_urlpattern' %}">
+                    Meal Foods</a></li>
+            <li>
+                <a href="{% url 'calorie_counter_meal_log_list_urlpattern' %}">
+                    Meal Logs</a></li>
+            <li>
+                <a href="{% url 'calorie_counter_exercise_list_urlpattern' %}">
+                    Exercises</a></li>
+            <li>
+                <a href="{% url 'calorie_counter_exercise_log_list_urlpattern' %}">
+                    Exercise Logs</a></li>
+            <li>
+                <a href="{% url 'calorie_counter_calorie_goal_list_urlpattern' %}">
+                    Calorie Goals</a></li>
+        </ul>
+    </nav>
     <main>
         {% block content %}
             This is default content!
@@ -32,7 +59,15 @@
 
 <footer>
     <p>
-        No footer yet.
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img alt="Creative Commons License" style="border-width:0"
+                 src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/>
+        </a><br/><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">EZ University Tutorial Examples and Code</span>
+        by
+        <a xmlns:cc="http://creativecommons.org/ns#" href="https://www.ligent.net" property="cc:attributionName"
+           rel="cc:attributionURL">Ligent, LLC</a> are licensed under a
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike
+            4.0 International License</a>.
     </p>
 </footer>
 
