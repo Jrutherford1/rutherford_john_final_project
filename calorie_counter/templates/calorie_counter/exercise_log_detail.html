@@ -6,6 +6,11 @@
 
 {% block content %}
     <h2>Exercise Log for: {{ exercise_log.member }}</h2>
+    <ul>
+        <li>
+            <a href="{{ exercise_log.get_update_url }}"> Edit Exercise Log</a>
+        </li>
+    </ul>
 
     <section>
         <table>

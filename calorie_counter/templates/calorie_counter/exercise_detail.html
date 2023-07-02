@@ -6,6 +6,11 @@
 
 {% block content %}
     <h2>{{ exercise }}</h2>
+    <ul>
+        <li>
+            <a href="{{ exercise.get_update_url }}"> Edit Exercise</a>
+        </li>
+    </ul>
 
     <section>
         <table>

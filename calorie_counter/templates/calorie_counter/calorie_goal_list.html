@@ -7,11 +7,7 @@
 
 {%  block content %}
     <h2> Calorie Goal List </h2>
-    <ul>
-        <li>
-            <a href="{{ calorie_goal.get_update_url }}"> Edit Calorie Goal</a>
-        </li>
-    </ul>
+
     <div>
         <a href="{% url 'calorie_counter_calorie_goal_create_urlpattern' %}"> Add a new calorie goal</a>
     </div>

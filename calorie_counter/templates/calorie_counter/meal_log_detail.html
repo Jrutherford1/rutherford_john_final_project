@@ -6,6 +6,11 @@
 
 {% block content %}
     <h2>Meal Log Detail</h2>
+    <ul>
+        <li>
+            <a href="{{ meal_log.get_update_url }}"> Edit Meal Log</a>
+        </li>
+    </ul>
 
     <section>
         <table>

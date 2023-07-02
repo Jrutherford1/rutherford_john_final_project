@@ -6,6 +6,11 @@
 
 {% block content %}
     <h2> {{ daily_macro_goal }}</h2>
+    <ul>
+        <li>
+            <a href="{{ daily_macro_goal.get_update_url }}"> Edit Daily Macro Goal</a>
+        </li>
+    </ul>
 
     <section>
         <table>

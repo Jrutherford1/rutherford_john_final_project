@@ -6,6 +6,11 @@
 
 {% block content %}
     <h2>{{ calorie_goal }}</h2>
+    <ul>
+        <li>
+            <a href="{{ calorie_goal.get_update_url }}"> Edit Calorie Goal</a>
+        </li>
+    </ul>
 
     <section>
         <table>

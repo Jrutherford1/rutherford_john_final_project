@@ -64,9 +64,9 @@ urlpatterns = [
             MemberCreate.as_view(),
             name='calorie_counter_member_create_urlpattern'),
 
-    path('member/<int:pk/update/>',
+    path('member/<int:pk>/update/',
          MemberUpdate.as_view(),
-            name='courseinfo_member_update_urlpattern'),
+            name='calorie_counter_member_update_urlpattern'),
 
     path('dailymacrogoal/',
              DailyMacroGoalList.as_view(),
@@ -80,9 +80,9 @@ urlpatterns = [
             DailyMacroGoalCreate.as_view(),
             name='calorie_counter_daily_macro_goal_create_urlpattern'),
 
-    path('dailymacrogoal/<int:pk/update/>',
+    path('dailymacrogoal/<int:pk>/update/',
          DailyMacroGoalUpdate.as_view(),
-            name='courseinfo_daily_macro_goal_update_urlpattern'),
+            name='calorie_counter_daily_macro_goal_update_urlpattern'),
 
     path('food/',
              FoodList.as_view(),
@@ -96,9 +96,9 @@ urlpatterns = [
             FoodCreate.as_view(),
             name='calorie_counter_food_create_urlpattern'),
 
-    path('food/<int:pk/update/>',
+    path('food/<int:pk>/update/',
          FoodUpdate.as_view(),
-            name='courseinfo_food_update_urlpattern'),
+            name='calorie_counter_food_update_urlpattern'),
 
     path('mealfood/',
              MealFoodList.as_view(),
@@ -112,9 +112,9 @@ urlpatterns = [
             MealFoodCreate.as_view(),
             name='calorie_counter_meal_food_create_urlpattern'),
 
-    path('mealfood/<int:pk/update/>',
+    path('mealfood/<int:pk>/update/',
          MealFoodUpdate.as_view(),
-            name='courseinfo_meal_food__update_urlpattern'),
+            name='calorie_counter_meal_food__update_urlpattern'),
 
     path('meallog/',
              MealLogList.as_view(),
@@ -128,9 +128,9 @@ urlpatterns = [
             MealLogCreate.as_view(),
             name='calorie_counter_meal_log_create_urlpattern'),
 
-    path('meallog/<int:pk/update/>',
+    path('meallog/<int:pk>/update/',
          MealLogUpdate.as_view(),
-            name='courseinfo_meal_log_update_urlpattern'),
+            name='calorie_counter_meal_log_update_urlpattern'),
 
     path('exercise/',
          ExerciseList.as_view(),
@@ -144,9 +144,9 @@ urlpatterns = [
          ExerciseCreate.as_view(),
          name='calorie_counter_exercise_create_urlpattern'),
 
-    path('exercise/<int:pk/update/>',
+    path('exercise/<int:pk>/update/',
          ExerciseUpdate.as_view(),
-            name='courseinfo_exercise_update_urlpattern'),
+            name='calorie_counter_exercise_update_urlpattern'),
 
     path('exerciselog/',
              ExerciseLogList.as_view(),
@@ -160,9 +160,9 @@ urlpatterns = [
             ExerciseLogCreate.as_view(),
             name='calorie_counter_exercise_log_create_urlpattern'),
 
-    path('exerciselog/<int:pk/update/>',
+    path('exerciselog/<int:pk>/update/',
          ExerciseLogUpdate.as_view(),
-            name='courseinfo_exercise_log_update_urlpattern'),
+            name='calorie_counter_exercise_log_update_urlpattern'),
 
     path('caloriegoal/',
              CalorieGoalList.as_view(),
@@ -176,9 +176,9 @@ urlpatterns = [
             CalorieGoalCreate.as_view(),
             name='calorie_counter_calorie_goal_create_urlpattern'),
 
-    path('caloriegoal/<int:pk/update/>',
+    path('caloriegoal/<int:pk>/update/',
          CalorieGoalUpdate.as_view(),
-            name='courseinfo_calorie_goal_update_urlpattern'),
+            name='calorie_counter_calorie_goal_update_urlpattern'),
 
     ]
 

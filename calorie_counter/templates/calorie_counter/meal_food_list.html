@@ -7,11 +7,7 @@
 
 {%  block content %}
     <h2> Meal Food List </h2>
-    <ul>
-        <li>
-            <a href="{{ meal_food.get_update_url }}"> Edit Meal Food</a>
-        </li>
-    </ul>
+
     <div>
         <a href="{% url 'calorie_counter_meal_food_create_urlpattern' %}"> Add a new meal food </a>
     </div>
