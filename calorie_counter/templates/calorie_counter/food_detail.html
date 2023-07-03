@@ -1,14 +1,14 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Food - {{ food }}
+    Food Detail
 {% endblock %}
 
 {% block content %}
-    <h2>{{ food.name }}</h2>
+    <h2>Food Detail for: {{ food_detail.name }}</h2>
     <ul>
         <li>
-            <a href="{{ food.get_update_url }}"> Edit Food</a>
+            <a href="{{ food_detail.get_update_url }}"> Edit Food</a>
         </li>
     </ul>
 
@@ -17,19 +17,19 @@
 
             <tr>
                 <th>Calories Per Serving:</th>
-                <td>{{ food.calories_per_serving }}</td>
+                <td>{{ food_detail.calories_per_serving }}</td>
             </tr>
             <tr>
                 <th>Protein (grams):</th>
-                <td>{{ food.protein_grams }}</td>
+                <td>{{ food_detail.protein_grams }}</td>
             </tr>
             <tr>
                 <th>Carbohydrates (grams):</th>
-                <td>{{ food.carbohydrates_grams }}</td>
+                <td>{{ food_detail.carbohydrates_grams }}</td>
             </tr>
             <tr>
                 <th>Fat (grams):</th>
-                <td>{{ food.fat_grams }}</td>
+                <td>{{ food_detail.fat_grams }}</td>
             </tr>
         </table>
     </section>

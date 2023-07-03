@@ -1,11 +1,11 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Member - {{ first_name }}
+    Member Detail
 {% endblock %}
 
 {% block content %}
-    <h2>Member Detail</h2>
+    <h2>Member Detail for: {{ member_detail.first_name }} {{ member_detail.last_name }}</h2>
     <ul>
         <li>
             <a href="{{ member.get_update_url }}"> Edit Member</a>

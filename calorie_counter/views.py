@@ -99,11 +99,11 @@ class DailyMacroGoalList(View):
 
 class DailyMacroGoalDetail(View):
     def get(self, request, pk):
-        daily_macro_goal = get_object_or_404(DailyMacroGoal, pk=pk)
+        daily_macro_goal_detail = get_object_or_404(DailyMacroGoal, pk=pk)
         return render(
             request,
             'calorie_counter/daily_macro_goal_detail.html',
-            {'daily_macro_goal': daily_macro_goal,
+            {'daily_macro_goal_detail': daily_macro_goal_detail,
              }
         )
 
@@ -162,11 +162,11 @@ class FoodList(View):
 
 class FoodDetail(View):
     def get(self, request, pk):
-        food = get_object_or_404(Food, pk=pk)
+        food_detail = get_object_or_404(Food, pk=pk)
         return render(
             request,
             'calorie_counter/food_detail.html',
-            {'food': food,
+            {'food_detail': food_detail,
              }
         )
 
@@ -289,11 +289,11 @@ class MealLogList(View):
 
 class MealLogDetail(View):
     def get(self, request, pk):
-        meal_log = get_object_or_404(MealLog, pk=pk)
+        meal_log_detail = get_object_or_404(MealLog, pk=pk)
         return render(
             request,
             'calorie_counter/meal_log_detail.html',
-            {'meal_log': meal_log,
+            {'meal_log_detail': meal_log_detail,
              }
         )
 
@@ -353,11 +353,11 @@ class ExerciseList(View):
 
 class ExerciseDetail(View):
     def get(self, request, pk):
-        exercise = get_object_or_404(Exercise, pk=pk)
+        exercise_detail = get_object_or_404(Exercise, pk=pk)
         return render(
             request,
             'calorie_counter/exercise_detail.html',
-            {'exercise': exercise,
+            {'exercise_detail': exercise_detail,
              }
         )
 
@@ -417,11 +417,11 @@ class ExerciseLogList(View):
 
 class ExerciseLogDetail(View):
     def get(self, request, pk):
-        exercise_log = get_object_or_404(ExerciseLog, pk=pk)
+        exercise_log_detail = get_object_or_404(ExerciseLog, pk=pk)
         return render(
             request,
             'calorie_counter/exercise_log_detail.html',
-            {'exercise_log': exercise_log,
+            {'exercise_log_detail': exercise_log_detail,
              }
         )
 
@@ -481,11 +481,11 @@ class CalorieGoalList(View):
 
 class CalorieGoalDetail(View):
     def get(self, request, pk):
-        calorie_goal = get_object_or_404(CalorieGoal, pk=pk)
+        calorie_goal_detail = get_object_or_404(CalorieGoal, pk=pk)
         return render(
             request,
             'calorie_counter/calorie_goal_detail.html',
-            {'calorie_goal': calorie_goal,
+            {'calorie_goal_detail': calorie_goal_detail,
              }
         )
 

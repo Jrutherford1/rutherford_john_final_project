@@ -1,14 +1,14 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Exercise Log - {{ exercise_log }}
+    Exercise Log Detail
 {% endblock %}
 
 {% block content %}
-    <h2>Exercise Log for: {{ exercise_log.member }}</h2>
+    <h2>Exercise Log Detail for: {{ exercise_log_detail.member }}</h2>
     <ul>
         <li>
-            <a href="{{ exercise_log.get_update_url }}"> Edit Exercise Log</a>
+            <a href="{{ exercise_log_detail.get_update_url }}"> Edit Exercise Log</a>
         </li>
     </ul>
 
@@ -16,16 +16,16 @@
         <table>
             <tr>
                 <th>Date:</th>
-                <td>{{ exercise_log.date }}</td>
+                <td>{{ exercise_log_detail.date }}</td>
             </tr>
 
             <tr>
                 <th>Duration:</th>
-                <td>{{ exercise_log.duration }}</td>
+                <td>{{ exercise_log_detail.duration }}</td>
             </tr>
             <tr>
                 <th>Exercise:</th>
-                <td>{{ exercise_log.exercise }}</td>
+                <td>{{ exercise_log_detail.exercise }}</td>
             </tr>
 
         </table>

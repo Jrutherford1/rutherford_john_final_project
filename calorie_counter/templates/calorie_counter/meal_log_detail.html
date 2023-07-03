@@ -1,14 +1,14 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Meal Log - {{ meal_log_detail }}
+    Meal Log Detail
 {% endblock %}
 
 {% block content %}
-    <h2>Meal Log Detail</h2>
+    <h2>Meal Log Detail for: {{ meal_log_detail }}</h2>
     <ul>
         <li>
-            <a href="{{ meal_log.get_update_url }}"> Edit Meal Log</a>
+            <a href="{{ meal_log_detail.get_update_url }}"> Edit Meal Log</a>
         </li>
     </ul>
 
@@ -16,29 +16,18 @@
         <table>
             <tr>
                 <th>Meal Type:</th>
-                <td>{{ meal_log.meal_type }}</td>
+                <td>{{ meal_log_detail.meal_type }}</td>
             </tr>
             <tr>
                 <th>Date:</th>
-                <td>{{ meal_log.date }}</td>
+                <td>{{ meal_log_detail.date }}</td>
             </tr>
             <tr>
                 <th>Time:</th>
-                <td>{{ meal_log.time }}</td>
+                <td>{{ meal_log_detail.time }}</td>
             </tr>
 
         </table>
-    </section>
-    <h3>List of Foods: SECTION NOT WORKING</h3>
-        <section>
-            <ul>
-                {% for registration in student.registrations.all %}
-                    <li>{{ registration }}</li>
-                {% empty %}
-                    <li><em>This student has no registrations.</em></li>
-                {% endfor %}
-            </ul>
-        </section>
 
 
 {% endblock %}

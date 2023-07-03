@@ -1,14 +1,16 @@
 >{% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-   daily macro goal - {{ student.first_name }} {{ student.last_name
+   Daily Macro Goal Detail
 {% endblock %}
 
+
 {% block content %}
-    <h2> {{ daily_macro_goal }}</h2>
+
+    <h2> {{ daily_macro_goal_detail }}</h2>
     <ul>
         <li>
-            <a href="{{ daily_macro_goal.get_update_url }}"> Edit Daily Macro Goal</a>
+            <a href="{{ daily_macro_goal_detail.get_update_url }}"> Edit Daily Macro Goal</a>
         </li>
     </ul>
 
@@ -16,15 +18,15 @@
         <table>
             <tr>
                 <th>Carbohydrate (gram):</th>
-                <td>{{ daily_macro_goal.carbohydrate_goal }}</td>
+                <td>{{ daily_macro_goal_detail.carbohydrate_goal }}</td>
             </tr>
             <tr>
                 <th>Protein (gram):</th>
-                <td>{{ daily_macro_goal.protein_goal}}</td>
+                <td>{{ daily_macro_goal_detail.protein_goal}}</td>
             </tr>
             <tr>
                 <th>Fat (gram):</th>
-                <td>{{ daily_macro_goal.fat_goal}}</td>
+                <td>{{ daily_macro_goal_detail.fat_goal}}</td>
             </tr>
 
         </table>

@@ -1,11 +1,11 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Exercise Log - {{ meal_food }}
+    Meal Food Detail
 {% endblock %}
 
 {% block content %}
-    <h1>Meal Food Detail</h1>
+    <h2>Meal Food Detail for {{ meal_food_detail.food }}</h2>
     <ul>
         <li>
             <a href="{{ meal_food.get_update_url }}"> Edit Meal Food</a>

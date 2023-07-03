@@ -1,14 +1,14 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Exercise - {{ exercise.exercise.type }}
+  Exercise Detail
 {% endblock %}
 
 {% block content %}
-    <h2>{{ exercise }}</h2>
+    <h2>Exercise Detail - {{ exercise_detail.exercise_type }}</h2>
     <ul>
         <li>
-            <a href="{{ exercise.get_update_url }}"> Edit Exercise</a>
+            <a href="{{ exercise_detail.get_update_url }}"> Edit Exercise</a>
         </li>
     </ul>
 
@@ -16,15 +16,15 @@
         <table>
             <tr>
                 <th>Type:</th>
-                <td>{{ exercise.exercise_type }}</td>
+                <td>{{ exercise_detail.exercise_type }}</td>
             </tr>
             <tr>
                 <th>Category:</th>
-                <td>{{ exercise.exercise_category }}</td>
+                <td>{{ exercise_detail.exercise_category }}</td>
             </tr>
             <tr>
                 <th>Calories burned per minute:</th>
-                <td>{{ exercise.calories_burned_per_minute}}</td>
+                <td>{{ exercise_detail.calories_burned_per_minute}}</td>
             </tr>
         </table>
     </section>
