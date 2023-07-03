@@ -8,7 +8,7 @@
     <h2>Member Detail for: {{ member_detail.first_name }} {{ member_detail.last_name }}</h2>
     <ul>
         <li>
-            <a href="{{ member.get_update_url }}"> Edit Member</a>
+            <a href="{{ member_detail.get_update_url }}"> Edit Member</a>
         </li>
     </ul>
 
@@ -22,10 +22,10 @@
                 <th>Last Name:</th>
                 <td>{{ member_detail.last_name }}</td>
             </tr>
-            {% if member.disambiguator %}
+            {% if member_detail.disambiguator %}
                 <tr>
                     <th>Disambiguator:</th>
-                    <td>{{ member.disambiguator }}</td>
+                    <td>{{ member_detail.disambiguator }}</td>
                 </tr>
             {% endif %}
             <tr>
