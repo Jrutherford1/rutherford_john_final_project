@@ -85,6 +85,28 @@ class MemberUpdate(View):
                 context)
 
 
+class MemberDelete(View):
+
+    def get(self, request, pk):
+        member = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/member_confirm_delete.html',
+            {'member': member}
+        )
+
+    def get_object(self, pk):
+        member = get_object_or_404(
+            Member,
+            pk=pk
+        )
+        return member
+
+    def post(self, request, pk):
+        member = self.get_object(pk)
+        member.delete()
+        return redirect('courseinfo_member_list_urlpattern')
+
 
 
 class DailyMacroGoalList(View):
@@ -151,6 +173,30 @@ class DailyMacroGoalUpdate(View):
                 context)
 
 
+class DailyMacroGoalDelete(View):
+
+    def get(self, request, pk):
+        daily_macro_goal = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/daily_macro_goal_confirm_delete.html',
+            {'daily_macro_goal': daily_macro_goal}
+        )
+
+    def get_object(self, pk):
+        daily_macro_goal = get_object_or_404(
+            DailyMacroGoal,
+            pk=pk
+        )
+        return daily_macro_goal
+
+    def post(self, request, pk):
+        daily_macro_goal = self.get_object(pk)
+        daily_macro_goal.delete()
+        return redirect('courseinfo_daily_macro_goal_list_urlpattern')
+
+
+
 class FoodList(View):
 
     def get(self, request):
@@ -211,6 +257,30 @@ class FoodUpdate(View):
                 request,
                 self.template_name,
                 context)
+
+
+class FoodDelete(View):
+
+    def get(self, request, pk):
+        food = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/food_confirm_delete.html',
+            {'food': food}
+        )
+
+    def get_object(self, pk):
+        food = get_object_or_404(
+            Food,
+            pk=pk
+        )
+        return food
+
+    def post(self, request, pk):
+        food = self.get_object(pk)
+        food.delete()
+        return redirect('courseinfo_food_list_urlpattern')
+
 
 
 class MealFoodList(View):
@@ -277,6 +347,30 @@ class MealFoodUpdate(View):
                 context)
 
 
+class MealFoodDelete(View):
+
+    def get(self, request, pk):
+        meal_food = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/meal_food_confirm_delete.html',
+            {'meal_food': meal_food}
+        )
+
+    def get_object(self, pk):
+        meal_food = get_object_or_404(
+            MealFood,
+            pk=pk
+        )
+        return meal_food
+
+    def post(self, request, pk):
+        meal_food = self.get_object(pk)
+        meal_food.delete()
+        return redirect('courseinfo_meal_food_list_urlpattern')
+
+
+
 class MealLogList(View):
 
     def get(self, request):
@@ -339,6 +433,30 @@ class MealLogUpdate(View):
                 request,
                 self.template_name,
                 context)
+
+
+class MealLogDelete(View):
+
+    def get(self, request, pk):
+        meal_log = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/meal_log_confirm_delete.html',
+            {'meal_log': meal_log}
+        )
+
+    def get_object(self, pk):
+        meal_log = get_object_or_404(
+            MealLog,
+            pk=pk
+        )
+        return meal_log
+
+    def post(self, request, pk):
+        meal_log = self.get_object(pk)
+        meal_log.delete()
+        return redirect('courseinfo_meal_log_list_urlpattern')
+
 
 
 class ExerciseList(View):
@@ -405,6 +523,30 @@ class ExerciseUpdate(View):
                 context)
 
 
+class ExerciseDelete(View):
+
+    def get(self, request, pk):
+        exercise = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/exercise_confirm_delete.html',
+            {'exercise': exercise}
+        )
+
+    def get_object(self, pk):
+        exercise = get_object_or_404(
+            Exercise,
+            pk=pk
+        )
+        return exercise
+
+    def post(self, request, pk):
+        exercise = self.get_object(pk)
+        exercise.delete()
+        return redirect('courseinfo_exercise_list_urlpattern')
+
+
+
 class ExerciseLogList(View):
 
     def get(self, request):
@@ -467,6 +609,28 @@ class ExerciseLogUpdate(View):
                 request,
                 self.template_name,
                 context)
+
+class ExerciseLogDelete(View):
+
+    def get(self, request, pk):
+        exercise_log = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/exercise_log_confirm_delete.html',
+            {'exercise_log': exercise_log}
+        )
+
+    def get_object(self, pk):
+        exercise_log = get_object_or_404(
+            ExerciseLog,
+            pk=pk
+        )
+        return exercise_log
+
+    def post(self, request, pk):
+        exercise_log = self.get_object(pk)
+        exercise_log.delete()
+        return redirect('courseinfo_exercise_log_list_urlpattern')
 
 
 class CalorieGoalList(View):
@@ -531,3 +695,26 @@ class CalorieGoalUpdate(View):
                 request,
                 self.template_name,
                 context)
+
+
+class CalorieGoalDelete(View):
+
+    def get(self, request, pk):
+        calorie_goal = self.get_object(pk)
+        return render(
+            request,
+            'courseinfo/calorie_goal_confirm_delete.html',
+            {'calorie_goal': calorie_goal}
+        )
+
+    def get_object(self, pk):
+        calorie_goal = get_object_or_404(
+            CalorieGoal,
+            pk=pk
+        )
+        return calorie_goal
+
+    def post(self, request, pk):
+        calorie_goal = self.get_object(pk)
+        calorie_goal.delete()
+        return redirect('courseinfo_calorie_goal_list_urlpattern')

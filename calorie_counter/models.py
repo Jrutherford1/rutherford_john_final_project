@@ -37,6 +37,11 @@ class Member(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_delete_url(self):
+        return reverse('calorie_counter_member_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['first_name', 'last_name', 'e_mail'], name='unique_member')
@@ -58,6 +63,11 @@ class DailyMacroGoal(models.Model):
 
     def get_update_url(self):
         return reverse('calorie_counter_daily_macro_goal_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    def get_delete_url(self):
+        return reverse('calorie_counter_daily_macro_goal_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
@@ -86,6 +96,11 @@ class Food(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_delete_url(self):
+        return reverse('calorie_counter_food_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['name'], name='unique_food')
@@ -104,6 +119,11 @@ class MealFood(models.Model):
 
     def get_update_url(self):
         return reverse('calorie_counter_meal_food_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    def get_delete_url(self):
+        return reverse('calorie_counter_meal_food_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
@@ -135,6 +155,11 @@ class MealLog(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_delete_url(self):
+        return reverse('calorie_counter_meal_log_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     def __str__(self):
         return '%s for %s on %s' % (self.meal_type, self.member, self.date)
 
@@ -163,6 +188,11 @@ class Exercise(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_delete_url(self):
+        return reverse('calorie_counter_exercise_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['exercise_type'], name='unique_exercise')
@@ -186,6 +216,11 @@ class ExerciseLog(models.Model):
                        kwargs={'pk': self.pk}
                        )
 
+    def get_delete_url(self):
+        return reverse('calorie_counter_exercise_log_delete_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
     def __str__(self):
         return 'Exercise Log: %s on %s' % ( self.member, self.date )
 
@@ -204,6 +239,11 @@ class CalorieGoal(models.Model):
 
     def get_update_url(self):
         return reverse('calorie_counter_calorie_goal_update_urlpattern',
+                       kwargs={'pk': self.pk}
+                       )
+
+    def get_delete_url(self):
+        return reverse('calorie_counter_calorie_goal_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
