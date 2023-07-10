@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,15 +14,22 @@
     <!--[if IE]><script
       src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
     </script><![endif]-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'calorie_counter/normalize.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'calorie_counter/skeleton.css' %}">
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'calorie_counter/style.css' %}">
+    {% block head %}{% endblock %}
 </head>
 
 <body>
 
 <div class="container"><!-- start of container -->
     <header class = "row">
-        <div class = "header">
-        <h1 class = "top-title">Calorie Counter</h1>
-        <h2>Calorie Tracking System</h2>
+        <div class = "offset-by-one ten columns">
+            <h1 class = "top-title">TESTING Calorie Counter</h1>
+            <h2>Calorie Tracking System</h2>
         </div>
     </header>
     <nav>
@@ -54,14 +62,31 @@
     </nav>
     <main>
         {% block content %}
-            This is default content!
+            <div class="row">
+                <section class="eight columns">
+                    {% block org_content %}
+                        This is default content!
+                    {% endblock %}
+                </section>
+                <section class="desktop four columns">
+                    {% block create_button %}{% endblock %}
+                </section>
+            </div>
+            <div class="row">
+                <div class="twelve columns">
+                    {% block content_footer %}{% endblock %}
+                </div>
+            </div>
         {% endblock %}
     </main>
 </div><!-- end of container -->
 
 <footer>
-    <p>
-        No footer yet!
+       <p>Portions of the Calorie Counter code are based upon code from
+        <a href="https://django-unleashed.com">Django Unleashed</a>,
+        <a href="http://getskeleton.com/">Skeleton</a>, and
+        <a href="https://necolas.github.io/normalize.css/">Normalize.css</a> and
+        are subject to the intellectual property rights restrictions of those works.
     </p>
 </footer>
 
