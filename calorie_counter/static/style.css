@@ -48,6 +48,10 @@ header h1 {
 	padding-top: 0;
 }
 
+top-title {
+	color:red;
+}
+
 .logo {
 	padding-top: 50px;
 	background-image: url("/static/courseinfo/logo.png");
