@@ -12,15 +12,15 @@
             food is currently assigned to the following
             sections:
         </p>
-THIS SECTION NOT WORKING
+    <h4>Meal Food</h4>
         <ul>
-            {% for section in sections %}
-            <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
-            {%  endfor %}
+            {% for food in meal_foods %}
+            <li><a href="{{ food.get_absolute_url }}">{{ food }}</a></li>
+            {% endfor %}
         </ul>
 
         <p>
-            Return to <a href="{% url 'courseinfo_course_list_urlpattern' %}">Course List</a>.
+            Return to <a href="{% url 'calorie_counter_food_list_urlpattern' %}">Course List</a>.
         </p>
     </div>
 {% endblock %}

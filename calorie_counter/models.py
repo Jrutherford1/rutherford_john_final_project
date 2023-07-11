@@ -18,7 +18,6 @@ class Member(models.Model):
     date_joined = models.DateField()
     disambiguator = models.CharField(max_length=45, blank=True, default='')
 
-
     def __str__(self):
         result = ''
         if self.disambiguator == '':

@@ -33,11 +33,20 @@ class MemberList(View):
 
 class MemberDetail(View):
     def get(self, request, pk):
-        member_detail = get_object_or_404(Member, pk=pk)
+        member = get_object_or_404(
+            Member,
+            pk=pk
+        )
+        calorie_goals = member.calorie_goals.all()
+        meal_logs = member.meal_logs.all()
+        exercise_logs = member.exercise_logs.all()
         return render(
             request,
             'calorie_counter/member_detail.html',
-            {'member_detail': member_detail,
+            {'member_detail': member,
+             'calorie_goals': calorie_goals,
+             'meal_logs': meal_logs,
+             'exercise_logs': exercise_logs,
              }
         )
 
@@ -89,11 +98,26 @@ class MemberDelete(View):
 
     def get(self, request, pk):
         member = self.get_object(pk)
-        return render(
-            request,
-            'calorie_counter/member_confirm_delete.html',
-            {'member': member}
-        )
+        calorie_goals = member.calorie_goals.all()
+        meal_logs = member.meal_logs.all()
+        exercise_logs = member.exercise_logs.all()
+
+        if calorie_goals.count() > 0 or meal_logs.count() > 0 or exercise_logs.count() > 0:
+            return render(
+                request,
+                'calorie_counter/member_refuse_delete.html',
+                {'member': member,
+                 'calorie_goals': calorie_goals,
+                 'meal_logs': meal_logs,
+                 'exercise_logs': exercise_logs,
+                 }
+            )
+        else:
+            return render(
+                request,
+                'calorie_counter/member_confirm_delete.html',
+                {'member': member}
+            )
 
     def get_object(self, pk):
         member = get_object_or_404(
@@ -262,18 +286,27 @@ class FoodDelete(View):
 
     def get(self, request, pk):
         food = self.get_object(pk)
-        return render(
-            request,
-            'calorie_counter/food_confirm_delete.html',
-            {'food': food}
-        )
+        meal_foods = food.meal_foods.all()
+
+        if meal_foods.count() > 0:
+            return render(
+                request,
+                'calorie_counter/food_refuse_delete.html',
+                {'food': food,
+                 'meal_foods': meal_foods,
+                 }
+            )
+        else:
+            return render(
+                request,
+                'calorie_counter/food_confirm_delete.html',
+                {'food': food }
+            )
 
     def get_object(self, pk):
-        food = get_object_or_404(
+        return get_object_or_404(
             Food,
-            pk=pk
-        )
-        return food
+            pk=pk)
 
     def post(self, request, pk):
         food = self.get_object(pk)
@@ -346,21 +379,38 @@ class MealFoodUpdate(View):
 
 
 class MealFoodDelete(View):
-
     def get(self, request, pk):
         meal_food = self.get_object(pk)
-        return render(
-            request,
-            'calorie_counter/meal_food_confirm_delete.html',
-            {'meal_food': meal_food}
-        )
+
+        # Get related MealLog and Food
+        meal_log = meal_food.meal_log
+        food = meal_food.food
+
+        # Check if MealFood is associated with a MealLog
+        if meal_log is not None:
+            return render(
+                request,
+                'calorie_counter/meal_food_refuse_delete.html',
+                {
+                    'meal_food': meal_food,
+                    'meal_log': meal_log,
+                    'food': food,
+                }
+            )
+        else:
+            return render(
+                request,
+                'calorie_counter/meal_food_confirm_delete.html',
+                {
+                    'meal_food': meal_food,
+                }
+            )
 
     def get_object(self, pk):
-        meal_food = get_object_or_404(
+        return get_object_or_404(
             MealFood,
             pk=pk
         )
-        return meal_food
 
     def post(self, request, pk):
         meal_food = self.get_object(pk)
@@ -381,12 +431,15 @@ class MealLogList(View):
 class MealLogDetail(View):
     def get(self, request, pk):
         meal_log_detail = get_object_or_404(MealLog, pk=pk)
+        meal_foods = meal_log_detail.meal_foods.all()
         return render(
             request,
             'calorie_counter/meal_log_detail.html',
             {'meal_log_detail': meal_log_detail,
+             'meal_foods': meal_foods,
              }
         )
+
 
 
 class MealLogCreate(ObjectCreateMixin, View):
@@ -433,21 +486,33 @@ class MealLogUpdate(View):
 
 
 class MealLogDelete(View):
-
     def get(self, request, pk):
         meal_log = self.get_object(pk)
-        return render(
-            request,
-            'calorie_counter/meal_log_confirm_delete.html',
-            {'meal_log': meal_log}
-        )
+        meal_foods = meal_log.meal_foods.all()
+
+        if meal_foods.count() > 0:
+            return render(
+                request,
+                'calorie_counter/meal_log_refuse_delete.html',
+                {
+                    'meal_log': meal_log,
+                    'meal_foods': meal_foods,
+                }
+            )
+        else:
+            return render(
+                request,
+                'calorie_counter/meal_log_confirm_delete.html',
+                {
+                    'meal_log': meal_log,
+                }
+            )
 
     def get_object(self, pk):
-        meal_log = get_object_or_404(
+        return get_object_or_404(
             MealLog,
             pk=pk
         )
-        return meal_log
 
     def post(self, request, pk):
         meal_log = self.get_object(pk)
@@ -520,21 +585,33 @@ class ExerciseUpdate(View):
 
 
 class ExerciseDelete(View):
-
     def get(self, request, pk):
         exercise = self.get_object(pk)
-        return render(
-            request,
-            'calorie_counter/exercise_confirm_delete.html',
-            {'exercise': exercise}
-        )
+        exercise_logs = exercise.exercise_logs.all()
+
+        if exercise_logs.count() > 0:
+            return render(
+                request,
+                'calorie_counter/exercise_refuse_delete.html',
+                {
+                    'exercise': exercise,
+                    'exercise_logs': exercise_logs,
+                }
+            )
+        else:
+            return render(
+                request,
+                'calorie_counter/exercise_confirm_delete.html',
+                {
+                    'exercise': exercise,
+                }
+            )
 
     def get_object(self, pk):
-        exercise = get_object_or_404(
+        return get_object_or_404(
             Exercise,
             pk=pk
         )
-        return exercise
 
     def post(self, request, pk):
         exercise = self.get_object(pk)

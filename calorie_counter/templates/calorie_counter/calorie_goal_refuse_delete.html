@@ -10,7 +10,7 @@
         <p>
             You may not delete calorie goal {{ calorie_goal }}.  This
             goal is currently assigned to the following
-            sections:
+            member:
         </p>
 THIS SECTION NOT WORKING
         <ul>
@@ -20,7 +20,7 @@ THIS SECTION NOT WORKING
         </ul>
 
         <p>
-            Return to <a href="{% url 'courseinfo_course_list_urlpattern' %}">Course List</a>.
+            Return to <a href="{% url 'calorie_counter_calorie_goal_list_urlpattern' %}">Course List</a>.
         </p>
     </div>
 {% endblock %}

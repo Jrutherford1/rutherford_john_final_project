@@ -51,26 +51,28 @@
         </table>
     </section>
 
-     <h3>Meals SECTION NOT WORKING</h3>
-        <section>
-            <ul>
-                {% for meal_log in meal_type.meal_log_list.all %}
-                    <li>{{ meal_type }}</li>
-                {% empty %}
-                    <li><em>This member has no meals.</em></li>
-                {% endfor %}
-            </ul>
-        </section>
-        <h3>Registrations</h3>
-        <section>
-            <ul>
-                {% for registration in student.registrations.all %}
-                    <li>{{ registration }}</li>
-                {% empty %}
-                    <li><em>This student has no registrations.</em></li>
-                {% endfor %}
-            </ul>
-        </section>
-        </section>
+
+
+<h5>Calorie Goals</h5>
+<ul>
+    {% for goal in calorie_goals %}
+    <li><a href="{{ goal.get_absolute_url }}">{{ goal }}</a></li>
+    {% endfor %}
+</ul>
+
+<h5>Meal Logs</h5>
+<ul>
+    {% for log in meal_logs %}
+    <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
+    {% endfor %}
+</ul>
+
+<h5>Exercise Logs</h5>
+<ul>
+    {% for log in exercise_logs %}
+    <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
+    {% endfor %}
+</ul>
+
 
 {% endblock %}

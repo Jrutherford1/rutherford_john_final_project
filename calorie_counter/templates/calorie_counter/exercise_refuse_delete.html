@@ -6,21 +6,20 @@
 
 {% block content %}
     <div>
-        <h2>Error Deleting Exercise</h2>
+        <h2>Error Deleting Exercise </h2>
         <p>
-            You may not delete exercise {{ exercise }}.  This
-            exercise is currently assigned to the following
-            sections:
+            You may not delete exercise {{ exercise }} because it has the following exercise logs:
         </p>
-THIS SECTION NOT WORKING
+
+        <h4>Related Exercise Logs:</h4>
         <ul>
-            {% for section in sections %}
-            <li><a href="{{ section.get_absolute_url }}">{{ section }}</a></li>
-            {%  endfor %}
+            {% for exercise_log in exercise_logs %}
+            <li><a href="{{ exercise_log.get_absolute_url }}">{{ exercise_log }}</a></li>
+            {% endfor %}
         </ul>
 
         <p>
-            Return to <a href="{% url 'courseinfo_course_list_urlpattern' %}">Course List</a>.
+            Return to <a href="{% url 'calorie_counter_exercise_list_urlpattern' %}">Exercise List</a>.
         </p>
     </div>
 {% endblock %}
