@@ -19,11 +19,11 @@ class Member(models.Model):
     disambiguator = models.CharField(max_length=45, blank=True, default='')
 
     def __str__(self):
-        result = ''
+
         if self.disambiguator == '':
-            result = '%s %s ' % (self.first_name, self.last_name)
+            result = '%s %s ' % (self.last_name, self.first_name)
         else:
-            result = '%s, %s (%s)' % (self.first_name, self.last_name, self.disambiguator)
+            result = '%s, %s (%s)' % (self.last_name, self.first_name, self.disambiguator)
         return result
 
     def get_absolute_url(self):
@@ -42,6 +42,7 @@ class Member(models.Model):
                        )
 
     class Meta:
+        ordering = ['last_name', 'first_name', 'disambiguator']
         constraints = [
             models.UniqueConstraint(fields=['first_name', 'last_name', 'e_mail'], name='unique_member')
         ]
@@ -184,13 +185,13 @@ class Exercise(models.Model):
 
     def get_update_url(self):
         return reverse('calorie_counter_exercise_update_urlpattern',
-                       kwargs={'pk': self.pk}
-                       )
+                        kwargs={'pk': self.pk}
+                        )
 
     def get_delete_url(self):
         return reverse('calorie_counter_exercise_delete_urlpattern',
-                       kwargs={'pk': self.pk}
-                       )
+                        kwargs={'pk': self.pk}
+                        )
 
     class Meta:
         constraints = [

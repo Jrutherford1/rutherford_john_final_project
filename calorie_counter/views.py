@@ -21,14 +21,14 @@ from calorie_counter.forms import CalorieGoalForm
 from calorie_counter.forms import MealFoodForm
 
 
-class MemberList(View):
+from django.views.generic import ListView
+from .models import Member
 
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/member_list.html',
-            {'member_list': Member.objects.all()}
-        )
+
+class MemberList(ListView):
+    model = Member
+    template_name = 'calorie_counter/member_list.html'
+    context_object_name = 'member_list'
 
 
 class MemberDetail(View):
@@ -228,6 +228,7 @@ class FoodList(View):
             {'food_list': Food.objects.all()}
         )
 
+
 class FoodDetail(View):
     def get(self, request, pk):
         food_detail = get_object_or_404(Food, pk=pk)
@@ -300,7 +301,7 @@ class FoodDelete(View):
             return render(
                 request,
                 'calorie_counter/food_confirm_delete.html',
-                {'food': food }
+                {'food': food}
             )
 
     def get_object(self, pk):
