@@ -16,11 +16,20 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from .views import redirect_root_view
+from django.views.generic import RedirectView, TemplateView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('calorie_counter.urls')),
-    path('', redirect_root_view),
+    path('',
+         RedirectView.as_view(
+                pattern_name='calorie_counter_member_list_urlpattern',
+                permanent=False
+         )),
+    path('about/',
+            TemplateView.as_view(
+                template_name='calorie_counter/about.html'),
+                name='about_urlpattern'
+         ),
 ]
