@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
+from django.urls import reverse_lazy
 
 
 from calorie_counter.models import Member
@@ -10,7 +11,7 @@ from calorie_counter.models import Exercise
 from calorie_counter.models import ExerciseLog
 from calorie_counter.models import CalorieGoal
 from calorie_counter.models import MealFood
-from calorie_counter.utils import ObjectCreateMixin
+from calorie_counter.utils import ObjectCreateMixin, PageLinksMixin
 from calorie_counter.forms import MemberForm
 from calorie_counter.forms import DailyMacroGoalForm
 from calorie_counter.forms import FoodForm
@@ -21,14 +22,14 @@ from calorie_counter.forms import CalorieGoalForm
 from calorie_counter.forms import MealFoodForm
 
 
-from django.views.generic import ListView
-from .models import Member
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-class MemberList(ListView):
+
+class MemberList(PageLinksMixin, ListView):
+    paginate_by = 25
     model = Member
-    template_name = 'calorie_counter/member_list.html'
-    context_object_name = 'member_list'
+
 
 
 class MemberDetail(View):
@@ -132,14 +133,11 @@ class MemberDelete(View):
         return redirect('calorie_counter_member_list_urlpattern')
 
 
-class DailyMacroGoalList(View):
+class DailyMacroGoalList(ListView):
+    model = DailyMacroGoal
+    template_name = 'calorie_counter/daily_macro_goal_list.html'
+    context_object_name = 'daily_macro_goal_list'
 
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/daily_macro_goal_list.html',
-            {'daily_macro_goal_list': DailyMacroGoal.objects.all()}
-        )
 
 
 class DailyMacroGoalDetail(View):
@@ -219,14 +217,9 @@ class DailyMacroGoalDelete(View):
         return redirect('calorie_counter_daily_macro_goal_list_urlpattern')
 
 
-class FoodList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/food_list.html',
-            {'food_list': Food.objects.all()}
-        )
+class FoodList(PageLinksMixin, ListView):
+    paginate_by = 25
+    model = Food
 
 
 class FoodDetail(View):
@@ -315,14 +308,10 @@ class FoodDelete(View):
         return redirect('calorie_counter_food_list_urlpattern')
 
 
-class MealFoodList(View):
-
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/meal_food_list.html',
-            {'meal_food_list': MealFood.objects.all()}
-        )
+class MealFoodList(ListView):
+    model = MealFood
+    template_name = 'calorie_counter/meal_food_list.html'
+    context_object_name = 'meal_food_list'
 
 
 class MealFoodDetail(View):
@@ -419,14 +408,11 @@ class MealFoodDelete(View):
         return redirect('calorie_counter_meal_food_list_urlpattern')
 
 
-class MealLogList(View):
+class MealLogList(ListView):
+    model = MealLog
+    template_name = 'calorie_counter/meal_log_list.html'
+    context_object_name = 'meal_log_list'
 
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/meal_log_list.html',
-            {'meal_log_list': MealLog.objects.all()}
-        )
 
 
 class MealLogDetail(View):
@@ -521,14 +507,10 @@ class MealLogDelete(View):
         return redirect('calorie_counter_meal_log_list_urlpattern')
 
 
-class ExerciseList(View):
+class ExerciseList(ListView):
+    model = Exercise
+    template_name = 'calorie_counter/exercise_list.html'
 
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/exercise_list.html',
-            {'exercise_list': Exercise.objects.all()}
-        )
 
 
 class ExerciseDetail(View):
@@ -620,14 +602,11 @@ class ExerciseDelete(View):
         return redirect('calorie_counter_exercise_list_urlpattern')
 
 
-class ExerciseLogList(View):
+class ExerciseLogList(ListView):
+    model = ExerciseLog
+    template_name = 'calorie_counter/exercise_log_list.html'
+    context_object_name = 'exercise_log_list'
 
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/exercise_log_list.html',
-            {'exercise_log_list': ExerciseLog.objects.all()}
-        )
 
 
 class ExerciseLogDetail(View):
@@ -707,14 +686,11 @@ class ExerciseLogDelete(View):
         return redirect('calorie_counter_exercise_log_list_urlpattern')
 
 
-class CalorieGoalList(View):
+class CalorieGoalList(ListView):
+    model = CalorieGoal
+    template_name = 'calorie_counter/calorie_goal_list.html'
+    context_object_name = 'calorie_goal_list'
 
-    def get(self, request):
-        return render(
-            request,
-            'calorie_counter/calorie_goal_list.html',
-            {'calorie_goal_list': CalorieGoal.objects.all()}
-        )
 
 
 class CalorieGoalDetail(View):
