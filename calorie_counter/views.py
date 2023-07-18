@@ -25,31 +25,23 @@ from calorie_counter.forms import MealFoodForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
-
 class MemberList(PageLinksMixin, ListView):
     paginate_by = 25
     model = Member
 
 
+class MemberDetail(DetailView):
+    model = Member
+    template_name = 'calorie_counter/member_detail.html'
 
-class MemberDetail(View):
-    def get(self, request, pk):
-        member = get_object_or_404(
-            Member,
-            pk=pk
-        )
-        calorie_goals = member.calorie_goals.all()
-        meal_logs = member.meal_logs.all()
-        exercise_logs = member.exercise_logs.all()
-        return render(
-            request,
-            'calorie_counter/member_detail.html',
-            {'member_detail': member,
-             'calorie_goals': calorie_goals,
-             'meal_logs': meal_logs,
-             'exercise_logs': exercise_logs,
-             }
-        )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        member = self.get_object()
+        context['member_detail'] = context.get('member')
+        context['calorie_goals'] = member.calorie_goals.all()
+        context['meal_logs'] = member.meal_logs.all()
+        context['exercise_logs'] = member.exercise_logs.all()
+        return context
 
 
 class MemberCreate(ObjectCreateMixin, View):
@@ -139,16 +131,10 @@ class DailyMacroGoalList(ListView):
     context_object_name = 'daily_macro_goal_list'
 
 
-
-class DailyMacroGoalDetail(View):
-    def get(self, request, pk):
-        daily_macro_goal_detail = get_object_or_404(DailyMacroGoal, pk=pk)
-        return render(
-            request,
-            'calorie_counter/daily_macro_goal_detail.html',
-            {'daily_macro_goal_detail': daily_macro_goal_detail,
-             }
-        )
+class DailyMacroGoalDetail(DetailView):
+    model = DailyMacroGoal
+    template_name = 'calorie_counter/daily_macro_goal_detail.html'
+    context_object_name = 'daily_macro_goal_detail'
 
 
 class DailyMacroGoalCreate(ObjectCreateMixin, View):
@@ -222,15 +208,14 @@ class FoodList(PageLinksMixin, ListView):
     model = Food
 
 
-class FoodDetail(View):
-    def get(self, request, pk):
-        food_detail = get_object_or_404(Food, pk=pk)
-        return render(
-            request,
-            'calorie_counter/food_detail.html',
-            {'food_detail': food_detail,
-             }
-        )
+class FoodDetail(DetailView):
+    model = Food
+    template_name = 'calorie_counter/food_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['food_detail'] = context.get('food')
+        return context
 
 
 class FoodCreate(ObjectCreateMixin, View):
@@ -314,15 +299,14 @@ class MealFoodList(ListView):
     context_object_name = 'meal_food_list'
 
 
-class MealFoodDetail(View):
-    def get(self, request, pk):
-        meal_food_detail = get_object_or_404(MealFood, pk=pk)
-        return render(
-            request,
-            'calorie_counter/meal_food_detail.html',
-            {'meal_food_detail': meal_food_detail,
-             }
-        )
+class MealFoodDetail(DetailView):
+    model = MealFood
+    template_name = 'calorie_counter/meal_food_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['meal_food_detail'] = context.get('mealfood')
+        return context
 
 
 class MealFoodCreate(ObjectCreateMixin, View):
@@ -414,19 +398,14 @@ class MealLogList(ListView):
     context_object_name = 'meal_log_list'
 
 
+class MealLogDetail(DetailView):
+    model = MealLog
+    template_name = 'calorie_counter/meal_log_detail.html'
 
-class MealLogDetail(View):
-    def get(self, request, pk):
-        meal_log_detail = get_object_or_404(MealLog, pk=pk)
-        meal_foods = meal_log_detail.meal_foods.all()
-        return render(
-            request,
-            'calorie_counter/meal_log_detail.html',
-            {'meal_log_detail': meal_log_detail,
-             'meal_foods': meal_foods,
-             }
-        )
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['meal_log_detail'] = context.get('meallog')
+        return context
 
 
 class MealLogCreate(ObjectCreateMixin, View):
@@ -512,16 +491,10 @@ class ExerciseList(ListView):
     template_name = 'calorie_counter/exercise_list.html'
 
 
-
-class ExerciseDetail(View):
-    def get(self, request, pk):
-        exercise_detail = get_object_or_404(Exercise, pk=pk)
-        return render(
-            request,
-            'calorie_counter/exercise_detail.html',
-            {'exercise_detail': exercise_detail,
-             }
-        )
+class ExerciseDetail(DetailView):
+    model = Exercise
+    template_name = 'calorie_counter/exercise_detail.html'
+    context_object_name = 'exercise_detail'
 
 
 class ExerciseCreate(ObjectCreateMixin, View):
@@ -608,16 +581,10 @@ class ExerciseLogList(ListView):
     context_object_name = 'exercise_log_list'
 
 
-
-class ExerciseLogDetail(View):
-    def get(self, request, pk):
-        exercise_log_detail = get_object_or_404(ExerciseLog, pk=pk)
-        return render(
-            request,
-            'calorie_counter/exercise_log_detail.html',
-            {'exercise_log_detail': exercise_log_detail,
-             }
-        )
+class ExerciseLogDetail(DetailView):
+    model = ExerciseLog
+    template_name = 'calorie_counter/exercise_log_detail.html'
+    context_object_name = 'exercise_log_detail'
 
 
 class ExerciseLogCreate(ObjectCreateMixin, View):
@@ -692,16 +659,10 @@ class CalorieGoalList(ListView):
     context_object_name = 'calorie_goal_list'
 
 
-
-class CalorieGoalDetail(View):
-    def get(self, request, pk):
-        calorie_goal_detail = get_object_or_404(CalorieGoal, pk=pk)
-        return render(
-            request,
-            'calorie_counter/calorie_goal_detail.html',
-            {'calorie_goal_detail': calorie_goal_detail,
-             }
-        )
+class CalorieGoalDetail(DetailView):
+    model = CalorieGoal
+    template_name = 'calorie_counter/calorie_goal_detail.html'
+    context_object_name = 'calorie_goal_detail'
 
 
 class CalorieGoalCreate(ObjectCreateMixin, View):
