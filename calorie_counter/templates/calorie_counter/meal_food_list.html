@@ -9,7 +9,8 @@
     <h2> Meal Food List </h2>
 
     <div>
-        <a href="{% url 'calorie_counter_meal_food_create_urlpattern' %}"> Add a new meal food </a>
+        <a href="{% url 'calorie_counter_meal_food_create_urlpattern' %}"
+      class="button button-primary"> Add a new meal food </a>
     </div>
     <ul>
         {% for meal_food in meal_food_list %}

@@ -6,12 +6,14 @@
 
 {% block content %}
     <h2>Meal Food Detail for {{ meal_food_detail.food }}</h2>
-    <ul>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ meal_food_detail.get_update_url }}"> Edit Meal Food</a>
+            <a href="{{ meal_food_detail.get_update_url }}"
+      class="button button-primary"> Edit Meal Food</a>
         </li>
         <li>
-            <a href="{{ meal_food_detail.get_delete_url }}"> Delete Meal Food</a>
+            <a href="{{ meal_food_detail.get_delete_url }}"
+      class="button button-primary"> Delete Meal Food</a>
         </li>
     </ul>
 

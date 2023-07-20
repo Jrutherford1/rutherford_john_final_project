@@ -7,12 +7,14 @@
 {% block content %}
     <h2>Calorie Goal Detail For - {{ calorie_goal_detail.member }}</h2>
 
-    <ul>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ calorie_goal_detail.get_update_url }}"> Update Calorie Goal</a>
+            <a href="{{ calorie_goal_detail.get_update_url }}"
+      class="button button-primary"> Update Calorie Goal</a>
         </li>
         <li>
-            <a href="{{ calorie_goal_detail.get_delete_url }}"> Delete Calorie Goal</a>
+            <a href="{{ calorie_goal_detail.get_delete_url }}"
+      class="button button-primary"> Delete Calorie Goal</a>
         </li>
     </ul>
 

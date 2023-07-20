@@ -6,12 +6,14 @@
 
 {% block content %}
     <h2>Exercise Log Detail for: {{ exercise_log_detail.member }}</h2>
-    <ul>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ exercise_log_detail.get_update_url }}"> Edit Exercise Log</a>
+            <a href="{{ exercise_log_detail.get_update_url }}"
+      class="button button-primary"> Edit Exercise Log</a>
         </li>
         <li>
-            <a href="{{ exercise_log_detail.get_delete_url }}"> Delete Exercise Log</a>
+            <a href="{{ exercise_log_detail.get_delete_url }}"
+      class="button button-primary"> Delete Exercise Log</a>
         </li>
     </ul>
 

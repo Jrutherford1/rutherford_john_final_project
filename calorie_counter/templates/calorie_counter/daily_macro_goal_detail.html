@@ -8,12 +8,14 @@
 {% block content %}
 
     <h2> {{ daily_macro_goal_detail }}</h2>
-    <ul>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ daily_macro_goal_detail.get_update_url }}"> Edit Daily Macro Goal</a>
+            <a href="{{ daily_macro_goal_detail.get_update_url }}"
+      class="button button-primary"> Edit Daily Macro Goal</a>
         </li>
         <li>
-            <a href="{{ daily_macro_goal_detail.get_delete_url }}"> Delete Daily Macro Goal</a>
+            <a href="{{ daily_macro_goal_detail.get_delete_url }}"
+      class="button button-primary"> Delete Daily Macro Goal</a>
         </li>
     </ul>
 

@@ -9,7 +9,8 @@
     <h2> Calorie Goal List </h2>
 
     <div>
-        <a href="{% url 'calorie_counter_calorie_goal_create_urlpattern' %}"> Add a new calorie goal</a>
+        <a href="{% url 'calorie_counter_calorie_goal_create_urlpattern' %}"
+      class="button button-primary"> Add a new calorie goal</a>
     </div>
     <ul>
         {% for calorie_goal in calorie_goal_list %}

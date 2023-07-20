@@ -8,7 +8,8 @@ Member List
     <h2> Member List </h2>
 
     <div>
-        <a href="{% url 'calorie_counter_member_create_urlpattern' %}"> Add a new member </a>
+        <a href="{% url 'calorie_counter_member_create_urlpattern' %}"
+      class="button button-primary"> Add a new member </a>
     </div>
     <ul>
         {% for member in member_list %}

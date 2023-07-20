@@ -6,12 +6,14 @@
 
 {% block content %}
     <h2>Member Detail for: {{ member_detail.first_name }} {{ member_detail.last_name }}</h2>
-    <ul>
+    <ul class="ezu-button-list">
         <li>
-            <a href="{{ member_detail.get_update_url }}"> Edit Member</a>
+            <a href="{{ member_detail.get_update_url }}"
+      class="button button-primary"> Edit Member</a>
         </li>
         <li>
-            <a href="{{ member_detail.get_delete_url }}"> Delete Member</a>
+            <a href="{{ member_detail.get_delete_url }}"
+      class="button button-primary"> Delete Member</a>
         </li>
     </ul>
 
