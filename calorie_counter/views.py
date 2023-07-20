@@ -11,7 +11,7 @@ from calorie_counter.models import Exercise
 from calorie_counter.models import ExerciseLog
 from calorie_counter.models import CalorieGoal
 from calorie_counter.models import MealFood
-from calorie_counter.utils import ObjectCreateMixin, PageLinksMixin
+from calorie_counter.utils import PageLinksMixin
 from calorie_counter.forms import MemberForm
 from calorie_counter.forms import DailyMacroGoalForm
 from calorie_counter.forms import FoodForm
@@ -22,7 +22,7 @@ from calorie_counter.forms import CalorieGoalForm
 from calorie_counter.forms import MealFoodForm
 
 
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView,  UpdateView, DeleteView
 
 
 class MemberList(PageLinksMixin, ListView):
@@ -44,53 +44,24 @@ class MemberDetail(DetailView):
         return context
 
 
-class MemberCreate(ObjectCreateMixin, View):
+class MemberCreate(CreateView):
     form_class = MemberForm
+    model = Member
     template_name = 'calorie_counter/member_form.html'
 
 
-class MemberUpdate(View):
+class MemberUpdate(UpdateView):
     form_class = MemberForm
     model = Member
     template_name = 'calorie_counter/member_form_update.html'
 
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
+
+class MemberDelete(DeleteView):
+    model = Member
+    success_url = reverse_lazy('calorie_counter_member_list_urlpattern')
 
     def get(self, request, pk):
-        member = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=member),
-            'member': member,
-        }
-        return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        member = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=member)
-        if bound_form.is_valid():
-            new_member = bound_form.save()
-            return redirect(new_member)
-        else:
-            context = {
-                'form': bound_form,
-                'member': member,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
-
-
-class MemberDelete(View):
-
-    def get(self, request, pk):
-        member = self.get_object(pk)
+        member = self.get_object()
         calorie_goals = member.calorie_goals.all()
         meal_logs = member.meal_logs.all()
         exercise_logs = member.exercise_logs.all()
@@ -112,18 +83,6 @@ class MemberDelete(View):
                 {'member': member}
             )
 
-    def get_object(self, pk):
-        member = get_object_or_404(
-            Member,
-            pk=pk
-        )
-        return member
-
-    def post(self, request, pk):
-        member = self.get_object(pk)
-        member.delete()
-        return redirect('calorie_counter_member_list_urlpattern')
-
 
 class DailyMacroGoalList(ListView):
     model = DailyMacroGoal
@@ -137,70 +96,30 @@ class DailyMacroGoalDetail(DetailView):
     context_object_name = 'daily_macro_goal_detail'
 
 
-class DailyMacroGoalCreate(ObjectCreateMixin, View):
+class DailyMacroGoalCreate(CreateView):
     form_class = DailyMacroGoalForm
+    model = DailyMacroGoal
     template_name = 'calorie_counter/daily_macro_goal_form.html'
 
 
-class DailyMacroGoalUpdate(View):
-    form_class = DailyMacroGoalForm
+class DailyMacroGoalUpdate(UpdateView):
     model = DailyMacroGoal
+    form_class = DailyMacroGoalForm
     template_name = 'calorie_counter/daily_macro_goal_form_update.html'
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
-
-    def get(self, request, pk):
-        daily_macro_goal = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=daily_macro_goal),
-            'daily_macro_goal': daily_macro_goal,
-        }
-        return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        daily_macro_goal = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=daily_macro_goal)
-        if bound_form.is_valid():
-            new_daily_macro_goal = bound_form.save()
-            return redirect(new_daily_macro_goal)
-        else:
-            context = {
-                'form': bound_form,
-                'daily_macro_goal': daily_macro_goal,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
+    context_object_name = 'daily_macro_goal'
 
 
-class DailyMacroGoalDelete(View):
+class DailyMacroGoalDelete(DeleteView):
+    model = DailyMacroGoal
+    success_url = reverse_lazy('calorie_counter_daily_macro_goal_list_urlpattern')
 
     def get(self, request, pk):
-        daily_macro_goal = self.get_object(pk)
+        daily_macro_goal = self.get_object()
         return render(
             request,
             'calorie_counter/daily_macro_goal_confirm_delete.html',
             {'daily_macro_goal': daily_macro_goal}
         )
-
-    def get_object(self, pk):
-        daily_macro_goal = get_object_or_404(
-            DailyMacroGoal,
-            pk=pk
-        )
-        return daily_macro_goal
-
-    def post(self, request, pk):
-        daily_macro_goal = self.get_object(pk)
-        daily_macro_goal.delete()
-        return redirect('calorie_counter_daily_macro_goal_list_urlpattern')
 
 
 class FoodList(PageLinksMixin, ListView):
@@ -218,53 +137,24 @@ class FoodDetail(DetailView):
         return context
 
 
-class FoodCreate(ObjectCreateMixin, View):
+class FoodCreate(CreateView):
     form_class = FoodForm
+    model = Food
     template_name = 'calorie_counter/food_form.html'
 
 
-class FoodUpdate(View):
+class FoodUpdate(UpdateView):
     form_class = FoodForm
     model = Food
     template_name = 'calorie_counter/food_form_update.html'
 
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
+
+class FoodDelete(DeleteView):
+    model = Food
+    success_url = reverse_lazy('calorie_counter_food_list_urlpattern')
 
     def get(self, request, pk):
-        food = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=food),
-            'food': food,
-        }
-        return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        food = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=food)
-        if bound_form.is_valid():
-            new_food = bound_form.save()
-            return redirect(new_food)
-        else:
-            context = {
-                'form': bound_form,
-                'food': food,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
-
-
-class FoodDelete(View):
-
-    def get(self, request, pk):
-        food = self.get_object(pk)
+        food = self.get_object()
         meal_foods = food.meal_foods.all()
 
         if meal_foods.count() > 0:
@@ -281,16 +171,6 @@ class FoodDelete(View):
                 'calorie_counter/food_confirm_delete.html',
                 {'food': food}
             )
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            Food,
-            pk=pk)
-
-    def post(self, request, pk):
-        food = self.get_object(pk)
-        food.delete()
-        return redirect('calorie_counter_food_list_urlpattern')
 
 
 class MealFoodList(ListView):
@@ -309,87 +189,29 @@ class MealFoodDetail(DetailView):
         return context
 
 
-class MealFoodCreate(ObjectCreateMixin, View):
+class MealFoodCreate(CreateView):
     form_class = MealFoodForm
+    model = MealFood
     template_name = 'calorie_counter/meal_food_form.html'
 
 
-class MealFoodUpdate(View):
+class MealFoodUpdate(UpdateView):
     form_class = MealFoodForm
     model = MealFood
     template_name = 'calorie_counter/meal_food_form_update.html'
 
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
+
+class MealFoodDelete(DeleteView):
+    model = MealFood
+    success_url = reverse_lazy('calorie_counter_meal_food_list_urlpattern')
 
     def get(self, request, pk):
-        meal_food = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=meal_food),
-            'meal_food': meal_food,
-        }
+        meal_food = self.get_object()
         return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        meal_food = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=meal_food)
-        if bound_form.is_valid():
-            new_meal_food = bound_form.save()
-            return redirect(new_meal_food)
-        else:
-            context = {
-                'form': bound_form,
-                'meal_food': meal_food,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
-
-
-class MealFoodDelete(View):
-    def get(self, request, pk):
-        meal_food = self.get_object(pk)
-
-        # Get related MealLog and Food
-        meal_log = meal_food.meal_log
-        food = meal_food.food
-
-        # Check if MealFood is associated with a MealLog
-        if meal_log is not None:
-            return render(
-                request,
-                'calorie_counter/meal_food_refuse_delete.html',
-                {
-                    'meal_food': meal_food,
-                    'meal_log': meal_log,
-                    'food': food,
-                }
-            )
-        else:
-            return render(
-                request,
-                'calorie_counter/meal_food_confirm_delete.html',
-                {
-                    'meal_food': meal_food,
-                }
-            )
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            MealFood,
-            pk=pk
+            request,
+            'calorie_counter/meal_food_confirm_delete.html',
+            {'meal_food': meal_food}
         )
-
-    def post(self, request, pk):
-        meal_food = self.get_object(pk)
-        meal_food.delete()
-        return redirect('calorie_counter_meal_food_list_urlpattern')
 
 
 class MealLogList(ListView):
@@ -408,52 +230,24 @@ class MealLogDetail(DetailView):
         return context
 
 
-class MealLogCreate(ObjectCreateMixin, View):
+class MealLogCreate(CreateView):
     form_class = MealLogForm
+    model = MealLog
     template_name = 'calorie_counter/meal_log_form.html'
 
 
-class MealLogUpdate(View):
+class MealLogUpdate(UpdateView):
     form_class = MealLogForm
     model = MealLog
     template_name = 'calorie_counter/meal_log_form_update.html'
 
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
+
+class MealLogDelete(DeleteView):
+    model = MealLog
+    success_url = reverse_lazy('calorie_counter_meal_log_list_urlpattern')
 
     def get(self, request, pk):
-        meal_log = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=meal_log),
-            'meal_log': meal_log,
-        }
-        return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        meal_log = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=meal_log)
-        if bound_form.is_valid():
-            new_meal_log = bound_form.save()
-            return redirect(new_meal_log)
-        else:
-            context = {
-                'form': bound_form,
-                'meal_log': meal_log,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
-
-
-class MealLogDelete(View):
-    def get(self, request, pk):
-        meal_log = self.get_object(pk)
+        meal_log = self.get_object()
         meal_foods = meal_log.meal_foods.all()
 
         if meal_foods.count() > 0:
@@ -474,17 +268,6 @@ class MealLogDelete(View):
                 }
             )
 
-    def get_object(self, pk):
-        return get_object_or_404(
-            MealLog,
-            pk=pk
-        )
-
-    def post(self, request, pk):
-        meal_log = self.get_object(pk)
-        meal_log.delete()
-        return redirect('calorie_counter_meal_log_list_urlpattern')
-
 
 class ExerciseList(ListView):
     model = Exercise
@@ -497,82 +280,40 @@ class ExerciseDetail(DetailView):
     context_object_name = 'exercise_detail'
 
 
-class ExerciseCreate(ObjectCreateMixin, View):
+class ExerciseCreate(CreateView):
     form_class = ExerciseForm
+    model = Exercise
     template_name = 'calorie_counter/exercise_form.html'
 
 
-class ExerciseUpdate(View):
+class ExerciseUpdate(UpdateView):
     form_class = ExerciseForm
     model = Exercise
     template_name = 'calorie_counter/exercise_form_update.html'
 
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
+
+class ExerciseDelete(DeleteView):
+    model = Exercise
+    success_url = reverse_lazy('calorie_counter_exercise_list_urlpattern')
 
     def get(self, request, pk):
-        exercise = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=exercise),
-            'exercise': exercise,
-        }
-        return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        exercise = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=exercise)
-        if bound_form.is_valid():
-            new_exercise = bound_form.save()
-            return redirect(new_exercise)
-        else:
-            context = {
-                'form': bound_form,
-                'exercise': exercise,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
-
-
-class ExerciseDelete(View):
-    def get(self, request, pk):
-        exercise = self.get_object(pk)
+        exercise = self.get_object()
         exercise_logs = exercise.exercise_logs.all()
 
         if exercise_logs.count() > 0:
             return render(
                 request,
                 'calorie_counter/exercise_refuse_delete.html',
-                {
-                    'exercise': exercise,
-                    'exercise_logs': exercise_logs,
-                }
+                {'exercise': exercise,
+                 'exercise_logs': exercise_logs,
+                 }
             )
         else:
             return render(
                 request,
                 'calorie_counter/exercise_confirm_delete.html',
-                {
-                    'exercise': exercise,
-                }
+                {'exercise': exercise}
             )
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            Exercise,
-            pk=pk
-        )
-
-    def post(self, request, pk):
-        exercise = self.get_object(pk)
-        exercise.delete()
-        return redirect('calorie_counter_exercise_list_urlpattern')
 
 
 class ExerciseLogList(ListView):
@@ -587,47 +328,16 @@ class ExerciseLogDetail(DetailView):
     context_object_name = 'exercise_log_detail'
 
 
-class ExerciseLogCreate(ObjectCreateMixin, View):
+class ExerciseLogCreate(CreateView):
     form_class = ExerciseLogForm
+    model = ExerciseLog
     template_name = 'calorie_counter/exercise_log_form.html'
 
 
-class ExerciseLogUpdate(View):
+class ExerciseLogUpdate(UpdateView):
     form_class = ExerciseLogForm
     model = ExerciseLog
     template_name = 'calorie_counter/exercise_log_form_update.html'
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
-
-    def get(self, request, pk):
-        exercise_log = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=exercise_log),
-            'exercise_log': exercise_log,
-        }
-        return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        exercise_log = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=exercise_log)
-        if bound_form.is_valid():
-            new_exercise_log = bound_form.save()
-            return redirect(new_exercise_log)
-        else:
-            context = {
-                'form': bound_form,
-                'exercise_log': exercise_log,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
 
 
 class ExerciseLogDelete(View):
@@ -665,47 +375,16 @@ class CalorieGoalDetail(DetailView):
     context_object_name = 'calorie_goal_detail'
 
 
-class CalorieGoalCreate(ObjectCreateMixin, View):
+class CalorieGoalCreate(CreateView):
     form_class = CalorieGoalForm
+    model = CalorieGoal
     template_name = 'calorie_counter/calorie_goal_form.html'
 
 
-class CalorieGoalUpdate(View):
+class CalorieGoalUpdate(UpdateView):
     form_class = CalorieGoalForm
     model = CalorieGoal
     template_name = 'calorie_counter/calorie_goal_form_update.html'
-
-    def get_object(self, pk):
-        return get_object_or_404(
-            self.model,
-            pk=pk)
-
-    def get(self, request, pk):
-        calorie_goal = self.get_object(pk)
-        context = {
-            'form': self.form_class(
-                instance=calorie_goal),
-            'calorie_goal': calorie_goal,
-        }
-        return render(
-            request, self.template_name, context)
-
-    def post(self, request, pk):
-        calorie_goal = self.get_object(pk)
-        bound_form = self.form_class(
-            request.POST, instance=calorie_goal)
-        if bound_form.is_valid():
-            new_calorie_goal = bound_form.save()
-            return redirect(new_calorie_goal)
-        else:
-            context = {
-                'form': bound_form,
-                'calorie_goal': calorie_goal,
-            }
-            return render(
-                request,
-                self.template_name,
-                context)
 
 
 class CalorieGoalDelete(View):
