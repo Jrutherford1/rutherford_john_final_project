@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.urls import reverse_lazy
+from django.utils import timezone
+from django.db import models
 
 
 from calorie_counter.models import Member
@@ -30,6 +32,19 @@ class MemberList(PageLinksMixin, ListView):
     model = Member
 
 
+# class MemberDetail(DetailView):
+#     model = Member
+#     template_name = 'calorie_counter/member_detail.html'
+#
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         member = self.get_object()
+#         context['member_detail'] = context.get('member')
+#         context['calorie_goals'] = member.calorie_goals.all()
+#         context['meal_logs'] = member.meal_logs.all()
+#         context['exercise_logs'] = member.exercise_logs.all()
+#         return context
+
 class MemberDetail(DetailView):
     model = Member
     template_name = 'calorie_counter/member_detail.html'
@@ -38,9 +53,32 @@ class MemberDetail(DetailView):
         context = super().get_context_data(**kwargs)
         member = self.get_object()
         context['member_detail'] = context.get('member')
+
+        # Get today's date
+        today = timezone.now().date()
+
+        # Filter the member's meal logs and exercise logs by today's date
+        meal_logs_today = member.meal_logs.filter(date=today)
+        exercise_logs_today = member.exercise_logs.filter(date=today)
+
+        # Calculate the total calories from today's meals and exercises
+        total_calories_from_meals = sum(log.meal_foods.all().aggregate(
+            total_calories=models.Sum(models.F('food__calories_per_serving') * models.F('quantity'),
+                                      output_field=models.IntegerField()))['total_calories'] for log in meal_logs_today)
+        total_calories_burned_from_exercises = sum(
+            log.exercise.calories_burned_per_minute * log.duration for log in exercise_logs_today)
+
+        # Calculate net calories
+        net_calories = total_calories_from_meals - total_calories_burned_from_exercises
+
+        # Update the context
         context['calorie_goals'] = member.calorie_goals.all()
         context['meal_logs'] = member.meal_logs.all()
         context['exercise_logs'] = member.exercise_logs.all()
+        context['total_calories_from_meals_today'] = total_calories_from_meals
+        context['total_calories_burned_from_exercises_today'] = total_calories_burned_from_exercises
+        context['net_calories'] = net_calories
+
         return context
 
 

@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 from django.views.generic import RedirectView, TemplateView
 
@@ -22,18 +23,23 @@ from django.views.generic import RedirectView, TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path("login/",
-         TemplateView.as_view(template_name='calorie_counter/login.html'),
-         name="login_urlpattern"
-        ),
-
     path('', include('calorie_counter.urls')),
 
     path('',
          RedirectView.as_view(
-                pattern_name='calorie_counter_member_list_urlpattern',
+                pattern_name='about_urlpattern',
                 permanent=False
          )),
+
+    path("login/",
+         LoginView.as_view(template_name='calorie_counter/login.html'),
+         name="login_urlpattern"
+        ),
+
+    path("logout/",
+        LogoutView.as_view(),
+        name="logout_urlpattern"
+        ),
 
     path('about/',
             TemplateView.as_view(

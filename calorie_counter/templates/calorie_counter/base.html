@@ -26,6 +26,19 @@
 <body>
 
 <div class="container"><!-- start of container -->
+    <div class="status row">
+            <div class="offset-by-eight four columns">
+                <ul class="inline">
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout_urlpattern' %}">
+                            Log Out, {{ user.get_username }}</a></li>
+                    {% else %}
+                        <li><a href="{% url 'login_urlpattern' %}">
+                            Log In</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
     <header class = "row">
         <div class = "offset-by-one ten columns">
             <h1 class = "top-title">Calorie Counter</h1>

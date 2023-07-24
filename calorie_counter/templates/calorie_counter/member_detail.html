@@ -53,9 +53,11 @@
         </table>
     </section>
 
+<h5>NET CALORIES TODAY: {{ net_calories }}</h5>
 
 
 <h5>Calorie Goals</h5>
+
 <ul>
     {% for goal in calorie_goals %}
     <li><a href="{{ goal.get_absolute_url }}">{{ goal }}</a></li>

@@ -15,7 +15,7 @@
     <ul>
         {% for meal_food in meal_food_list %}
             <li>
-                <a href="{{ meal_food.get_absolute_url }}"> {{ meal_food }} </a>
+                <a href="{{ meal_food.get_absolute_url }}"> {{ meal_food }}, Meal Log Date: {{ meal_food.meal_log.date }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no meal_foods.</em></li>

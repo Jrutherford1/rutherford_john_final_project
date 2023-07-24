@@ -112,6 +112,7 @@ class MealFood(models.Model):
     food = models.ForeignKey(Food, related_name='meal_foods', on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=5, decimal_places=2, help_text="Serving size:")
 
+
     def get_absolute_url(self):
         return reverse('calorie_counter_meal_food_detail_urlpattern',
                        kwargs={'pk': self.pk}
@@ -128,7 +129,7 @@ class MealFood(models.Model):
                        )
 
     def __str__(self):
-        return "%s in %s" % (self.food, self.quantity)
+        return "%s -- Quantity:  %s" % (self.food, self.quantity)
 
 
 class MealLog(models.Model):
