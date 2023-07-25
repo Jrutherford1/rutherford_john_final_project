@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.urls import reverse_lazy
@@ -27,25 +28,12 @@ from calorie_counter.forms import MealFoodForm
 from django.views.generic import ListView, DetailView, CreateView,  UpdateView, DeleteView
 
 
-class MemberList(PageLinksMixin, ListView):
+class MemberList(LoginRequiredMixin, PermissionRequiredMixin, PageLinksMixin, ListView):
     paginate_by = 25
     model = Member
 
 
-# class MemberDetail(DetailView):
-#     model = Member
-#     template_name = 'calorie_counter/member_detail.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         member = self.get_object()
-#         context['member_detail'] = context.get('member')
-#         context['calorie_goals'] = member.calorie_goals.all()
-#         context['meal_logs'] = member.meal_logs.all()
-#         context['exercise_logs'] = member.exercise_logs.all()
-#         return context
-
-class MemberDetail(DetailView):
+class MemberDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Member
     template_name = 'calorie_counter/member_detail.html'
 
@@ -82,19 +70,19 @@ class MemberDetail(DetailView):
         return context
 
 
-class MemberCreate(CreateView):
+class MemberCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = MemberForm
     model = Member
     template_name = 'calorie_counter/member_form.html'
 
 
-class MemberUpdate(UpdateView):
+class MemberUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MemberForm
     model = Member
     template_name = 'calorie_counter/member_form_update.html'
 
 
-class MemberDelete(DeleteView):
+class MemberDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Member
     success_url = reverse_lazy('calorie_counter_member_list_urlpattern')
 
@@ -122,32 +110,32 @@ class MemberDelete(DeleteView):
             )
 
 
-class DailyMacroGoalList(ListView):
+class DailyMacroGoalList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = DailyMacroGoal
     template_name = 'calorie_counter/daily_macro_goal_list.html'
     context_object_name = 'daily_macro_goal_list'
 
 
-class DailyMacroGoalDetail(DetailView):
+class DailyMacroGoalDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = DailyMacroGoal
     template_name = 'calorie_counter/daily_macro_goal_detail.html'
     context_object_name = 'daily_macro_goal_detail'
 
 
-class DailyMacroGoalCreate(CreateView):
+class DailyMacroGoalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = DailyMacroGoalForm
     model = DailyMacroGoal
     template_name = 'calorie_counter/daily_macro_goal_form.html'
 
 
-class DailyMacroGoalUpdate(UpdateView):
+class DailyMacroGoalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = DailyMacroGoal
     form_class = DailyMacroGoalForm
     template_name = 'calorie_counter/daily_macro_goal_form_update.html'
     context_object_name = 'daily_macro_goal'
 
 
-class DailyMacroGoalDelete(DeleteView):
+class DailyMacroGoalDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = DailyMacroGoal
     success_url = reverse_lazy('calorie_counter_daily_macro_goal_list_urlpattern')
 
@@ -160,12 +148,12 @@ class DailyMacroGoalDelete(DeleteView):
         )
 
 
-class FoodList(PageLinksMixin, ListView):
+class FoodList(LoginRequiredMixin, PermissionRequiredMixin, PageLinksMixin, ListView):
     paginate_by = 25
     model = Food
 
 
-class FoodDetail(DetailView):
+class FoodDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Food
     template_name = 'calorie_counter/food_detail.html'
 
@@ -175,19 +163,19 @@ class FoodDetail(DetailView):
         return context
 
 
-class FoodCreate(CreateView):
+class FoodCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = FoodForm
     model = Food
     template_name = 'calorie_counter/food_form.html'
 
 
-class FoodUpdate(UpdateView):
+class FoodUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = FoodForm
     model = Food
     template_name = 'calorie_counter/food_form_update.html'
 
 
-class FoodDelete(DeleteView):
+class FoodDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Food
     success_url = reverse_lazy('calorie_counter_food_list_urlpattern')
 
@@ -211,35 +199,35 @@ class FoodDelete(DeleteView):
             )
 
 
-class MealFoodList(ListView):
+class MealFoodList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = MealFood
     template_name = 'calorie_counter/meal_food_list.html'
     context_object_name = 'meal_food_list'
 
 
-class MealFoodDetail(DetailView):
+class MealFoodDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = MealFood
     template_name = 'calorie_counter/meal_food_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['meal_food_detail'] = context.get('mealfood')
+        context['meal_food_detail'] = context.get('meal_food')
         return context
 
 
-class MealFoodCreate(CreateView):
+class MealFoodCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = MealFoodForm
     model = MealFood
     template_name = 'calorie_counter/meal_food_form.html'
 
 
-class MealFoodUpdate(UpdateView):
+class MealFoodUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MealFoodForm
     model = MealFood
     template_name = 'calorie_counter/meal_food_form_update.html'
 
 
-class MealFoodDelete(DeleteView):
+class MealFoodDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = MealFood
     success_url = reverse_lazy('calorie_counter_meal_food_list_urlpattern')
 
@@ -252,35 +240,35 @@ class MealFoodDelete(DeleteView):
         )
 
 
-class MealLogList(ListView):
+class MealLogList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = MealLog
     template_name = 'calorie_counter/meal_log_list.html'
     context_object_name = 'meal_log_list'
 
 
-class MealLogDetail(DetailView):
+class MealLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = MealLog
     template_name = 'calorie_counter/meal_log_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['meal_log_detail'] = context.get('meallog')
+        context['meal_log_detail'] = context.get('meal_log')
         return context
 
 
-class MealLogCreate(CreateView):
+class MealLogCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = MealLogForm
     model = MealLog
     template_name = 'calorie_counter/meal_log_form.html'
 
 
-class MealLogUpdate(UpdateView):
+class MealLogUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MealLogForm
     model = MealLog
     template_name = 'calorie_counter/meal_log_form_update.html'
 
 
-class MealLogDelete(DeleteView):
+class MealLogDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = MealLog
     success_url = reverse_lazy('calorie_counter_meal_log_list_urlpattern')
 
@@ -307,30 +295,30 @@ class MealLogDelete(DeleteView):
             )
 
 
-class ExerciseList(ListView):
+class ExerciseList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Exercise
     template_name = 'calorie_counter/exercise_list.html'
 
 
-class ExerciseDetail(DetailView):
+class ExerciseDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Exercise
     template_name = 'calorie_counter/exercise_detail.html'
     context_object_name = 'exercise_detail'
 
 
-class ExerciseCreate(CreateView):
+class ExerciseCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = ExerciseForm
     model = Exercise
     template_name = 'calorie_counter/exercise_form.html'
 
 
-class ExerciseUpdate(UpdateView):
+class ExerciseUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = ExerciseForm
     model = Exercise
     template_name = 'calorie_counter/exercise_form_update.html'
 
 
-class ExerciseDelete(DeleteView):
+class ExerciseDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Exercise
     success_url = reverse_lazy('calorie_counter_exercise_list_urlpattern')
 
@@ -354,95 +342,61 @@ class ExerciseDelete(DeleteView):
             )
 
 
-class ExerciseLogList(ListView):
+class ExerciseLogList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = ExerciseLog
     template_name = 'calorie_counter/exercise_log_list.html'
     context_object_name = 'exercise_log_list'
 
 
-class ExerciseLogDetail(DetailView):
+class ExerciseLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = ExerciseLog
     template_name = 'calorie_counter/exercise_log_detail.html'
     context_object_name = 'exercise_log_detail'
 
 
-class ExerciseLogCreate(CreateView):
+class ExerciseLogCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = ExerciseLogForm
     model = ExerciseLog
     template_name = 'calorie_counter/exercise_log_form.html'
 
 
-class ExerciseLogUpdate(UpdateView):
+class ExerciseLogUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = ExerciseLogForm
     model = ExerciseLog
     template_name = 'calorie_counter/exercise_log_form_update.html'
 
 
-class ExerciseLogDelete(View):
-
-    def get(self, request, pk):
-        exercise_log = self.get_object(pk)
-        return render(
-            request,
-            'calorie_counter/exercise_log_confirm_delete.html',
-            {'exercise_log': exercise_log}
-        )
-
-    def get_object(self, pk):
-        exercise_log = get_object_or_404(
-            ExerciseLog,
-            pk=pk
-        )
-        return exercise_log
-
-    def post(self, request, pk):
-        exercise_log = self.get_object(pk)
-        exercise_log.delete()
-        return redirect('calorie_counter_exercise_log_list_urlpattern')
+class ExerciseLogDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = ExerciseLog
+    template_name = 'calorie_counter/exercise_log_confirm_delete.html'
+    success_url = reverse_lazy('calorie_counter_exercise_log_list_urlpattern')
 
 
-class CalorieGoalList(ListView):
+class CalorieGoalList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = CalorieGoal
     template_name = 'calorie_counter/calorie_goal_list.html'
     context_object_name = 'calorie_goal_list'
 
 
-class CalorieGoalDetail(DetailView):
+class CalorieGoalDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = CalorieGoal
     template_name = 'calorie_counter/calorie_goal_detail.html'
     context_object_name = 'calorie_goal_detail'
 
 
-class CalorieGoalCreate(CreateView):
+class CalorieGoalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = CalorieGoalForm
     model = CalorieGoal
     template_name = 'calorie_counter/calorie_goal_form.html'
 
 
-class CalorieGoalUpdate(UpdateView):
+class CalorieGoalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = CalorieGoalForm
     model = CalorieGoal
     template_name = 'calorie_counter/calorie_goal_form_update.html'
 
 
-class CalorieGoalDelete(View):
-
-    def get(self, request, pk):
-        calorie_goal = self.get_object(pk)
-        return render(
-            request,
-            'calorie_counter/calorie_goal_confirm_delete.html',
-            {'calorie_goal': calorie_goal}
-        )
-
-    def get_object(self, pk):
-        calorie_goal = get_object_or_404(
-            CalorieGoal,
-            pk=pk
-        )
-        return calorie_goal
-
-    def post(self, request, pk):
-        calorie_goal = self.get_object(pk)
-        calorie_goal.delete()
-        return redirect('calorie_counter_calorie_goal_list_urlpattern')
+class CalorieGoalDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+    model = CalorieGoal
+    template_name = 'calorie_counter/calorie_goal_confirm_delete.html'
+    success_url = reverse_lazy('calorie_counter_calorie_goal_list_urlpattern')
