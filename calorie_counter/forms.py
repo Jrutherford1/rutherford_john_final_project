@@ -77,7 +77,7 @@ class MealFoodForm(forms.ModelForm):
         fields = '__all__'
 
         def clean_meal_log(self):
-            return self.cleaned_data['meal_log'].strip()
+            return self.cleaned_data['meallog'].strip()
 
         def clean_food(self):
             return self.cleaned_data['food'].strip()

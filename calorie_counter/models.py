@@ -44,30 +44,30 @@ class Member(models.Model):
     class Meta:
         ordering = ['last_name', 'first_name', 'disambiguator']
         constraints = [
-            models.UniqueConstraint(fields=['first_name', 'last_name', 'e_mail'], name='unique_member')
+            models.UniqueConstraint(fields=['last_name', 'first_name', 'e_mail'], name='unique_member')
         ]
 
 
 class DailyMacroGoal(models.Model):
     id = models.AutoField(primary_key=True)
-    member = models.ForeignKey('Member', related_name='daily_macro_goals', on_delete=models.CASCADE)
+    member = models.ForeignKey('Member', related_name='dailymacrogoals', on_delete=models.CASCADE)
     protein_goal = models.IntegerField()
     carbohydrate_goal = models.IntegerField()
     fat_goal = models.IntegerField()
     date = models.DateField()
 
     def get_absolute_url(self):
-        return reverse('calorie_counter_daily_macro_goal_detail_urlpattern',
+        return reverse('calorie_counter_dailymacrogoal_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_update_url(self):
-        return reverse('calorie_counter_daily_macro_goal_update_urlpattern',
+        return reverse('calorie_counter_dailymacrogoal_update_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_delete_url(self):
-        return reverse('calorie_counter_daily_macro_goal_delete_urlpattern',
+        return reverse('calorie_counter_dailymacrogoal_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
@@ -108,23 +108,23 @@ class Food(models.Model):
 
 
 class MealFood(models.Model):
-    meal_log = models.ForeignKey('MealLog', related_name='meal_foods', on_delete=models.CASCADE)
-    food = models.ForeignKey(Food, related_name='meal_foods', on_delete=models.CASCADE)
+    meal_log = models.ForeignKey('MealLog', related_name='mealfoods', on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, related_name='mealfoods', on_delete=models.CASCADE)
     quantity = models.DecimalField(max_digits=5, decimal_places=2, help_text="Serving size:")
 
 
     def get_absolute_url(self):
-        return reverse('calorie_counter_meal_food_detail_urlpattern',
+        return reverse('calorie_counter_mealfood_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_update_url(self):
-        return reverse('calorie_counter_meal_food_update_urlpattern',
+        return reverse('calorie_counter_mealfood_update_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_delete_url(self):
-        return reverse('calorie_counter_meal_food_delete_urlpattern',
+        return reverse('calorie_counter_mealfood_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
@@ -144,20 +144,20 @@ class MealLog(models.Model):
     date = models.DateField()
     time = models.TimeField()
     meal_type = models.CharField(max_length=50, choices=MEAL_CHOICES)
-    member = models.ForeignKey('Member', related_name='meal_logs', on_delete=models.PROTECT)
+    member = models.ForeignKey('Member', related_name='meallogs', on_delete=models.PROTECT)
 
     def get_absolute_url(self):
-        return reverse('calorie_counter_meal_log_detail_urlpattern',
+        return reverse('calorie_counter_meallog_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_update_url(self):
-        return reverse('calorie_counter_meal_log_update_urlpattern',
+        return reverse('calorie_counter_meallog_update_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_delete_url(self):
-        return reverse('calorie_counter_meal_log_delete_urlpattern',
+        return reverse('calorie_counter_meallog_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
@@ -204,21 +204,21 @@ class ExerciseLog(models.Model):
     id = models.AutoField(primary_key=True)
     date = models.DateField()
     duration = models.DecimalField(max_digits=5, decimal_places=2, help_text="Duration in minutes")
-    member = models.ForeignKey('Member', related_name='exercise_logs', on_delete=models.CASCADE)
-    exercise = models.ForeignKey('Exercise', related_name='exercise_logs', on_delete=models.PROTECT)
+    member = models.ForeignKey('Member', related_name='exerciselogs', on_delete=models.CASCADE)
+    exercise = models.ForeignKey('Exercise', related_name='exerciselogs', on_delete=models.PROTECT)
 
     def get_absolute_url(self):
-        return reverse('calorie_counter_exercise_log_detail_urlpattern',
+        return reverse('calorie_counter_exerciselog_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_update_url(self):
-        return reverse('calorie_counter_exercise_log_update_urlpattern',
+        return reverse('calorie_counter_exerciselog_update_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_delete_url(self):
-        return reverse('calorie_counter_exercise_log_delete_urlpattern',
+        return reverse('calorie_counter_exerciselog_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
@@ -228,23 +228,23 @@ class ExerciseLog(models.Model):
 
 class CalorieGoal(models.Model):
     id = models.AutoField(primary_key=True)
-    member = models.ForeignKey('Member', related_name='calorie_goals', on_delete=models.CASCADE)
+    member = models.ForeignKey('Member', related_name='caloriegoals', on_delete=models.CASCADE)
     target_calories = models.IntegerField()
     begin_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('calorie_counter_calorie_goal_detail_urlpattern',
+        return reverse('calorie_counter_caloriegoal_detail_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_update_url(self):
-        return reverse('calorie_counter_calorie_goal_update_urlpattern',
+        return reverse('calorie_counter_caloriegoal_update_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
     def get_delete_url(self):
-        return reverse('calorie_counter_calorie_goal_delete_urlpattern',
+        return reverse('calorie_counter_caloriegoal_delete_urlpattern',
                        kwargs={'pk': self.pk}
                        )
 
