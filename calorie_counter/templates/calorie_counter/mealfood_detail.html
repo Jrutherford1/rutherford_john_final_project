@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Meal Food Detail for {{ meal_food_detail.food }}</h2>
+    <h2>Meal Food Detail for {{ mealfood_detail.food }}</h2>
     <ul class="ezu-button-list">
         <li>
-            <a href="{{ meal_food_detail.get_update_url }}"
+            <a href="{{ mealfood_detail.get_update_url }}"
       class="button button-primary"> Edit Meal Food</a>
         </li>
         <li>
-            <a href="{{ meal_food_detail.get_delete_url }}"
+            <a href="{{ mealfood_detail.get_delete_url }}"
       class="button button-primary"> Delete Meal Food</a>
         </li>
     </ul>
@@ -21,15 +21,15 @@
         <table>
             <tr>
                 <th>Food:</th>
-                <td>{{ meal_food_detail.food }}</td>
+                <td>{{ mealfood_detail.food }}</td>
             </tr>
             <tr>
                 <th>Quantity:</th>
-                <td>{{ meal_food_detail.quantity }}</td>
+                <td>{{ mealfood_detail.quantity }}</td>
             </tr>
             <tr>
                 <th>Date:</th>
-                <td>{{ meal_food_detail.meal_log.date }}</td>
+                <td>{{ mealfood_detail.meal_log.date }}</td>
             </tr>
 
         </table>

@@ -6,14 +6,14 @@
 
 {% block content %}
     <form
-        action="{{ meal_food.get_delete_url }}"
+        action="{{ mealfood.get_delete_url }}"
         method="post">
         {% csrf_token %}
         <p>
             Are you sure that you want to delete
-            meal food {{ meal_food }}?
+            meal food {{ mealfood }}?
         </p>
-        <a href="{{ meal_food.get_absolute_url }}">Cancel</a>
+        <a href="{{ mealfood.get_absolute_url }}">Cancel</a>
         <button type="submit" class="button button-primary">Delete Meal Food</button>
     </form>
 {% endblock %}

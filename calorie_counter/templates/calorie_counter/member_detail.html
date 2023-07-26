@@ -59,21 +59,21 @@
 <h5>Calorie Goals</h5>
 
 <ul>
-    {% for goal in calorie_goals %}
+    {% for goal in caloriegoals %}
     <li><a href="{{ goal.get_absolute_url }}">{{ goal }}</a></li>
     {% endfor %}
 </ul>
 
 <h5>Meal Logs</h5>
 <ul>
-    {% for log in meal_logs %}
+    {% for log in meallogs %}
     <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
     {% endfor %}
 </ul>
 
 <h5>Exercise Logs</h5>
 <ul>
-    {% for log in exercise_logs %}
+    {% for log in exerciselogs %}
     <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
     {% endfor %}
 </ul>

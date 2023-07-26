@@ -6,14 +6,14 @@
 
 {% block content %}
     <form
-        action="{{ daily_macro_goal.get_delete_url }}"
+        action="{{ dailymacrogoal.get_delete_url }}"
         method="post">
         {% csrf_token %}
         <p>
             Are you sure that you want to delete
-            daily macro goal {{ daily_macro_goal }}?
+            daily macro goal {{ dailymacrogoal }}?
         </p>
-        <a href="{{ daily_macro_goal.get_absolute_url }}">Cancel</a>
+        <a href="{{ dailymacrogoal.get_absolute_url }}">Cancel</a>
         <button type="submit" class="button button-primary">Delete Daily Macro Goal</button>
     </form>
 {% endblock %}

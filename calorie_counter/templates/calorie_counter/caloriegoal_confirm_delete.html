@@ -6,14 +6,14 @@
 
 {% block content %}
     <form
-        action="{{ calorie_goal.get_delete_url }}"
+        action="{{ caloriegoal.get_delete_url }}"
         method="post">
         {% csrf_token %}
         <p>
             Are you sure that you want to delete
-            calorie goal {{ calorie_goal }}?
+            calorie goal {{ caloriegoal }}?
         </p>
-        <a href="{{ calorie_goal.get_absolute_url }}">Cancel</a>
+        <a href="{{ caloriegoal.get_absolute_url }}">Cancel</a>
         <button type="submit" class="button button-primary">Delete Calorie Goal</button>
     </form>
 {% endblock %}

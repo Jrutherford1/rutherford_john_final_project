@@ -1,16 +1,16 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Update Calorie Goal
+    Update Meal Food
 {% endblock %}
 
 {% block content %}
-    <h2>Update Calorie Goal</h2>
+    <h2>Update Meal Food</h2>
     <form
-        action="{{ calorie_goal.get_update_url }}"
+        action="{{ mealfood.get_update_url }}"
         method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="button button-primary">Update Calorie Goal</button>
+        <button type="submit" class="button button-primary">Update Meal Food</button>
     </form>
 {% endblock %}

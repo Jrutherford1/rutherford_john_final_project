@@ -6,14 +6,14 @@
 
 {% block content %}
     <form
-        action="{{ exercise_log.get_delete_url }}"
+        action="{{ exerciselog.get_delete_url }}"
         method="post">
         {% csrf_token %}
         <p>
             Are you sure that you want to delete
-            exercise_log {{ exercise_log }}?
+            exercise_log {{ exerciselog }}?
         </p>
-        <a href="{{ exercise_log.get_absolute_url }}">Cancel</a>
+        <a href="{{ exerciselog.get_absolute_url }}">Cancel</a>
         <button type="submit" class="button button-primary">Delete Exercise Log</button>
     </form>
 {% endblock %}

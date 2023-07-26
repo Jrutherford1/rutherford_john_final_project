@@ -7,7 +7,7 @@
 {% block content %}
     <h2>Create Exercise Log</h2>
     <form
-        action="{% url 'calorie_counter_exercise_log_create_urlpattern'%}"
+        action="{% url 'calorie_counter_exerciselog_create_urlpattern'%}"
         method="post">
         {% csrf_token %}
         {{ form.as_p }}

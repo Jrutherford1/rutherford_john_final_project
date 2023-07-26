@@ -9,16 +9,16 @@
     <h2> Meal Food List </h2>
 
     <div>
-        <a href="{% url 'calorie_counter_meal_food_create_urlpattern' %}"
+        <a href="{% url 'calorie_counter_mealfood_create_urlpattern' %}"
       class="button button-primary"> Add a new meal food </a>
     </div>
     <ul>
-        {% for meal_food in meal_food_list %}
+        {% for mealfood in mealfood_list %}
             <li>
-                <a href="{{ meal_food.get_absolute_url }}"> {{ meal_food }}, Meal Log Date: {{ meal_food.meal_log.date }} </a>
+                <a href="{{ mealfood.get_absolute_url }}"> {{ mealfood }}, Meal Log Date: {{ mealfood.meallog.date }} </a>
             </li>
         {%  empty   %}
-            <li><em>There are currently no meal_foods.</em></li>
+            <li><em>There are currently no meal foods.</em></li>
         {% endfor %}
     </ul>
 {%  endblock %}

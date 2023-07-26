@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Exercise Log Detail for: {{ exercise_log_detail.member }}</h2>
+    <h2>Exercise Log Detail for: {{ exerciselog_detail.member }}</h2>
     <ul class="ezu-button-list">
         <li>
-            <a href="{{ exercise_log_detail.get_update_url }}"
+            <a href="{{ exerciselog_detail.get_update_url }}"
       class="button button-primary"> Edit Exercise Log</a>
         </li>
         <li>
-            <a href="{{ exercise_log_detail.get_delete_url }}"
+            <a href="{{ exerciselog_detail.get_delete_url }}"
       class="button button-primary"> Delete Exercise Log</a>
         </li>
     </ul>
@@ -21,16 +21,16 @@
         <table>
             <tr>
                 <th>Date:</th>
-                <td>{{ exercise_log_detail.date }}</td>
+                <td>{{ exerciselog_detail.date }}</td>
             </tr>
 
             <tr>
                 <th>Duration:</th>
-                <td>{{ exercise_log_detail.duration }}</td>
+                <td>{{ exerciselog_detail.duration }}</td>
             </tr>
             <tr>
                 <th>Exercise:</th>
-                <td>{{ exercise_log_detail.exercise }}</td>
+                <td>{{ exerciselog_detail.exercise }}</td>
             </tr>
 
         </table>

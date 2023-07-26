@@ -9,15 +9,15 @@
     <h2> Calorie Goal List </h2>
 
     <div>
-        {%  if perms.calorie_counter.add_calorie_goal %}
-        <a href="{% url 'calorie_counter_calorie_goal_create_urlpattern' %}"
+        {%  if perms.calorie_counter.add_caloriegoal %}
+        <a href="{% url 'calorie_counter_caloriegoal_create_urlpattern' %}"
       class="button button-primary"> Add a new calorie goal</a>
         {%  endif %}
     </div>
     <ul>
-        {% for calorie_goal in calorie_goal_list %}
+        {% for caloriegoal in caloriegoal_list %}
             <li>
-                <a href="{{ calorie_goal.get_absolute_url }}"> {{ calorie_goal }} </a>
+                <a href="{{ caloriegoal.get_absolute_url }}"> {{ caloriegoal }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no calorie goals.</em></li>

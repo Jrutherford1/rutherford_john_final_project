@@ -1,16 +1,16 @@
 {% extends 'calorie_counter/base.html' %}
 
 {% block title %}
-    Error Deleting Calorie Goal
+    Error Deleting Daily Macro Goal
 {% endblock %}
 
 {% block content %}
     <div>
-        <h2>Error Deleting Calorie goal</h2>
+        <h2>Error Deleting daily macro goal</h2>
         <p>
-            You may not delete calorie goal {{ calorie_goal }}.  This
+            You may not delete daily macro goal {{ dailymacrogoal }}.  This
             goal is currently assigned to the following
-            member:
+            sections:
         </p>
 THIS SECTION NOT WORKING
         <ul>
@@ -20,7 +20,7 @@ THIS SECTION NOT WORKING
         </ul>
 
         <p>
-            Return to <a href="{% url 'calorie_counter_calorie_goal_list_urlpattern' %}">Course List</a>.
+            Return to <a href="{% url 'calorie_counter_dailymacrogoal_list_urlpattern' %}">Course List</a>.
         </p>
     </div>
 {% endblock %}

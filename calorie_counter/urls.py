@@ -82,23 +82,23 @@ urlpatterns = [
 
     path('dailymacrogoal/',
             DailyMacroGoalList.as_view(),
-            name='calorie_counter_daily_macro_goal_list_urlpattern'),
+            name='calorie_counter_dailymacrogoal_list_urlpattern'),
 
     path('dailymacrogoal/<int:pk>/',
             DailyMacroGoalDetail.as_view(),
-            name='calorie_counter_daily_macro_goal_detail_urlpattern'),
+            name='calorie_counter_dailymacrogoal_detail_urlpattern'),
 
     path('dailymacrogoal/create/',
             DailyMacroGoalCreate.as_view(),
-            name='calorie_counter_daily_macro_goal_create_urlpattern'),
+            name='calorie_counter_dailymacrogoal_create_urlpattern'),
 
     path('dailymacrogoal/<int:pk>/update/',
          DailyMacroGoalUpdate.as_view(),
-            name='calorie_counter_daily_macro_goal_update_urlpattern'),
+            name='calorie_counter_dailymacrogoal_update_urlpattern'),
 
     path('dailymacrogoal/<int:pk>/delete/',
             DailyMacroGoalDelete.as_view(),
-            name='calorie_counter_daily_macro_goal_delete_urlpattern'),
+            name='calorie_counter_dailymacrogoal_delete_urlpattern'),
 
     path('food/',
             FoodList.as_view(),
@@ -122,43 +122,43 @@ urlpatterns = [
 
     path('mealfood/',
              MealFoodList.as_view(),
-             name='calorie_counter_meal_food_list_urlpattern'),
+             name='calorie_counter_mealfood_list_urlpattern'),
 
     path('mealfood/<int:pk>/',
             MealFoodDetail.as_view(),
-            name='calorie_counter_meal_food_detail_urlpattern'),
+            name='calorie_counter_mealfood_detail_urlpattern'),
 
     path('mealfood/create/',
             MealFoodCreate.as_view(),
-            name='calorie_counter_meal_food_create_urlpattern'),
+            name='calorie_counter_mealfood_create_urlpattern'),
 
     path('mealfood/<int:pk>/update/',
             MealFoodUpdate.as_view(),
-            name='calorie_counter_meal_food_update_urlpattern'),
+            name='calorie_counter_mealfood_update_urlpattern'),
 
     path('mealfood/<int:pk>/delete/',
             MealFoodDelete.as_view(),
-            name='calorie_counter_meal_food_delete_urlpattern'),
+            name='calorie_counter_mealfood_delete_urlpattern'),
 
     path('meallog/',
             MealLogList.as_view(),
-            name='calorie_counter_meal_log_list_urlpattern'),
+            name='calorie_counter_meallog_list_urlpattern'),
 
     path('meallog/<int:pk>/',
             MealLogDetail.as_view(),
-            name='calorie_counter_meal_log_detail_urlpattern'),
+            name='calorie_counter_meallog_detail_urlpattern'),
 
     path('meallog/create/',
             MealLogCreate.as_view(),
-            name='calorie_counter_meal_log_create_urlpattern'),
+            name='calorie_counter_meallog_create_urlpattern'),
 
     path('meallog/<int:pk>/update/',
             MealLogUpdate.as_view(),
-            name='calorie_counter_meal_log_update_urlpattern'),
+            name='calorie_counter_meallog_update_urlpattern'),
 
     path('meallog/<int:pk>/delete/',
             MealLogDelete.as_view(),
-            name='calorie_counter_meal_log_delete_urlpattern'),
+            name='calorie_counter_meallog_delete_urlpattern'),
 
     path('exercise/',
             ExerciseList.as_view(),
@@ -182,43 +182,43 @@ urlpatterns = [
 
     path('exerciselog/',
              ExerciseLogList.as_view(),
-             name='calorie_counter_exercise_log_list_urlpattern'),
+             name='calorie_counter_exerciselog_list_urlpattern'),
 
     path('exerciselog/<int:pk>/',
             ExerciseLogDetail.as_view(),
-            name='calorie_counter_exercise_log_detail_urlpattern'),
+            name='calorie_counter_exerciselog_detail_urlpattern'),
 
     path('exerciselog/create/',
             ExerciseLogCreate.as_view(),
-            name='calorie_counter_exercise_log_create_urlpattern'),
+            name='calorie_counter_exerciselog_create_urlpattern'),
 
     path('exerciselog/<int:pk>/update/',
             ExerciseLogUpdate.as_view(),
-            name='calorie_counter_exercise_log_update_urlpattern'),
+            name='calorie_counter_exerciselog_update_urlpattern'),
 
     path('exerciselog/<int:pk>/delete/',
             ExerciseLogDelete.as_view(),
-            name='calorie_counter_exercise_log_delete_urlpattern'),
+            name='calorie_counter_exerciselog_delete_urlpattern'),
 
     path('caloriegoal/',
              CalorieGoalList.as_view(),
-             name='calorie_counter_calorie_goal_list_urlpattern'),
+             name='calorie_counter_caloriegoal_list_urlpattern'),
 
     path('caloriegoal/<int:pk>/',
             CalorieGoalDetail.as_view(),
-            name='calorie_counter_calorie_goal_detail_urlpattern'),
+            name='calorie_counter_caloriegoal_detail_urlpattern'),
 
     path('caloriegoal/create/',
             CalorieGoalCreate.as_view(),
-            name='calorie_counter_calorie_goal_create_urlpattern'),
+            name='calorie_counter_caloriegoal_create_urlpattern'),
 
     path('caloriegoal/<int:pk>/update/',
             CalorieGoalUpdate.as_view(),
-            name='calorie_counter_calorie_goal_update_urlpattern'),
+            name='calorie_counter_caloriegoal_update_urlpattern'),
 
     path('caloriegoal/<int:pk>/delete/',
             CalorieGoalDelete.as_view(),
-            name='calorie_counter_calorie_goal_delete_urlpattern'),
+            name='calorie_counter_caloriegoal_delete_urlpattern'),
 
     ]
 

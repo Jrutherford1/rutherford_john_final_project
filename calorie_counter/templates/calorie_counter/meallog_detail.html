@@ -5,14 +5,14 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Meal Log Detail for: {{ meal_log_detail }}</h2>
+    <h2>Meal Log Detail for: {{ meallog_detail }}</h2>
     <ul class="ezu-button-list">
         <li>
-            <a href="{{ meal_log_detail.get_update_url }}"
+            <a href="{{ meallog_detail.get_update_url }}"
       class="button button-primary"> Edit Meal Log</a>
         </li>
         <li>
-            <a href="{{ meal_log_detail.get_delete_url }}"
+            <a href="{{ meallog_detail.get_delete_url }}"
       class="button button-primary"> Delete Meal Log</a>
         </li>
     </ul>
@@ -21,15 +21,15 @@
         <table>
             <tr>
                 <th>Meal Type:</th>
-                <td>{{ meal_log_detail.meal_type }}</td>
+                <td>{{ meallog_detail.meal_type }}</td>
             </tr>
             <tr>
                 <th>Date:</th>
-                <td>{{ meal_log_detail.date }}</td>
+                <td>{{ meallog_detail.date }}</td>
             </tr>
             <tr>
                 <th>Time:</th>
-                <td>{{ meal_log_detail.time }}</td>
+                <td>{{ meallog_detail.time }}</td>
             </tr>
 
         </table>
@@ -40,10 +40,10 @@
         <th>Food</th>
         <th>Quantity</th>
     </tr>
-    {% for meal_food in meal_log_detail.meal_foods.all %}
+    {% for mealfood in meallog_detail.mealfoods.all %}
     <tr>
-        <td><a href="{{ meal_food.food.get_absolute_url }}">{{ meal_food.food.name }}</a></td>
-        <td>{{ meal_food.quantity }}</td>
+        <td><a href="{{ mealfood.food.get_absolute_url }}">{{ mealfood.food.name }}</a></td>
+        <td>{{ mealfood.quantity }}</td>
     </tr>
     {% empty %}
     <tr>

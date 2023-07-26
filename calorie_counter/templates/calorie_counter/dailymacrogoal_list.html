@@ -9,13 +9,13 @@
     <h2> Daily Macro Goal List </h2>
 
     <div>
-        <a href="{% url 'calorie_counter_daily_macro_goal_create_urlpattern' %}"
+        <a href="{% url 'calorie_counter_dailymacrogoal_create_urlpattern' %}"
       class="button button-primary"> Add a new daily macro goal </a>
     </div>
     <ul>
-        {% for daily_macro_goal in daily_macro_goal_list %}
+        {% for dailymacrogoal in dailymacrogoal_list %}
             <li>
-                <a href="{{ daily_macro_goal.get_absolute_url }}"> {{ daily_macro_goal }} </a>
+                <a href="{{ dailymacrogoal.get_absolute_url }}"> {{ dailymacrogoal }} </a>
             </li>
         {%  empty   %}
             <li><em>There are currently no daily macro goals.</em></li>
