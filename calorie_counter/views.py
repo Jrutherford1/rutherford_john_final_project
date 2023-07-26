@@ -136,6 +136,7 @@ class DailyMacroGoalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
     permission_required = 'calorie_counter.add_daily_macro_goal'
 
 
+
 class DailyMacroGoalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = DailyMacroGoal
     form_class = DailyMacroGoalForm
