@@ -47,33 +47,52 @@
     </header>
     <nav>
         <ul>
+            {%  if perms.calorie_counter.view_member %}
             <li>
                 <a href="{% url 'calorie_counter_member_list_urlpattern' %}">
                     Members</a></li>
+            {% endif %}
+
+            {%  if perms.calorie_counter.view_daily_macro_goal %}
             <li>
                 <a href="{% url 'calorie_counter_daily_macro_goal_list_urlpattern' %}">
                     Macro Goals</a></li>
+            {% endif %}
+            {%  if perms.calorie_counter.view_food %}
             <li>
                 <a href="{% url 'calorie_counter_food_list_urlpattern' %}">
                     Foods</a></li>
+            {% endif %}
+            {%  if perms.calorie_counter.view_mealfood %}
             <li>
                 <a href="{% url 'calorie_counter_meal_food_list_urlpattern' %}">
                     Meal Foods</a></li>
+            {% endif %}
+            {%  if perms.calorie_counter.view_meallog %}
             <li>
                 <a href="{% url 'calorie_counter_meal_log_list_urlpattern' %}">
                     Meal Logs</a></li>
+            {% endif %}
+            {%  if perms.calorie_counter.view_exercise %}
             <li>
                 <a href="{% url 'calorie_counter_exercise_list_urlpattern' %}">
                     Exercises</a></li>
+            {% endif %}
+            {%  if perms.calorie_counter.view_exerciselog %}
             <li>
                 <a href="{% url 'calorie_counter_exercise_log_list_urlpattern' %}">
                     Exercise Logs</a></li>
+            {% endif %}
+            {%  if perms.calorie_counter.view_caloriegoal %}
             <li>
                 <a href="{% url 'calorie_counter_calorie_goal_list_urlpattern' %}">
                     Calorie Goals</a></li>
+            {% endif %}
+            {%  if perms.calorie_counter.view_dailymacrogoal %}
             <li>
                 <a href="{% url 'about_urlpattern' %}">
                     About</a></li>
+            {% endif %}
         </ul>
     </nav>
     <main>
