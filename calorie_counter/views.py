@@ -43,8 +43,8 @@ class MemberDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
         today = timezone.now().date()
         meal_logs_today = member.meallogs.filter(date=today)
         exercise_logs_today = member.exerciselogs.filter(date=today)
-
         total_protein = total_carbs = total_fat = total_calories_from_meals = 0
+
         for log in meal_logs_today:
             for mealfood in log.mealfoods.all():
                 total_protein += mealfood.food.protein_grams * float(mealfood.quantity)
@@ -67,7 +67,6 @@ class MemberDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
             net_carbs = total_carbs
             net_fat = total_fat
 
-        # Update the context
         context['member_detail'] = member
         context['caloriegoals'] = member.caloriegoals.all()
         context['meallogs'] = member.meallogs.all()

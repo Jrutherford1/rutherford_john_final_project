@@ -1,5 +1,4 @@
 from django import forms
-
 from calorie_counter.models import Member
 from calorie_counter.models import DailyMacroGoal
 from calorie_counter.models import Food
