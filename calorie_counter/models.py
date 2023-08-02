@@ -51,10 +51,10 @@ class Member(models.Model):
 class DailyMacroGoal(models.Model):
     id = models.AutoField(primary_key=True)
     member = models.ForeignKey('Member', related_name='dailymacrogoals', on_delete=models.CASCADE)
-    protein_goal = models.IntegerField()
-    carbohydrate_goal = models.IntegerField()
-    fat_goal = models.IntegerField()
-    date = models.DateField()
+    protein_goal = models.IntegerField(help_text="grams")
+    carbohydrate_goal = models.IntegerField(help_text="grams")
+    fat_goal = models.IntegerField(help_text="grams")
+    date = models.DateField(help_text="00/00/0000")
 
     def get_absolute_url(self):
         return reverse('calorie_counter_dailymacrogoal_detail_urlpattern',
@@ -79,9 +79,9 @@ class Food(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     calories_per_serving = models.IntegerField()
-    protein_grams = models.IntegerField()
-    carbohydrates_grams = models.IntegerField()
-    fat_grams = models.IntegerField()
+    protein_grams = models.IntegerField(help_text="grams")
+    carbohydrates_grams = models.IntegerField(help_text="grams")
+    fat_grams = models.IntegerField(help_text="grams")
 
     def __str__(self):
         return '%s' % self.name
@@ -141,8 +141,8 @@ class MealLog(models.Model):
     ]
 
     id = models.AutoField(primary_key=True)
-    date = models.DateField()
-    time = models.TimeField()
+    date = models.DateField(help_text="00/00/0000")
+    time = models.TimeField(help_text="00:00:00")
     meal_type = models.CharField(max_length=50, choices=MEAL_CHOICES)
     member = models.ForeignKey('Member', related_name='meallogs', on_delete=models.PROTECT)
 

@@ -43,12 +43,16 @@
     <tr>
         <th>Food</th>
         <th>Quantity</th>
+        <th>Calories</th>
     </tr>
     {% for mealfood in meallog_detail.mealfoods.all %}
     <tr>
         <td><a href="{{ mealfood.food.get_absolute_url }}">{{ mealfood.food.name }}</a></td>
         <td>{{ mealfood.quantity }}</td>
+        <td>{{ mealfood.food.calories_per_serving }}</td>
     </tr>
+
+
     {% empty %}
     <tr>
         <td colspan="2">No foods associated with this meal log.</td>
@@ -56,6 +60,6 @@
     {% endfor %}
 </table>
 
-
+<h4>Total Calories: {{ total_calories }}</h4>
 
 {% endblock %}

@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.db import models
+from decimal import Decimal
 
 
 from calorie_counter.models import Member
@@ -40,32 +40,47 @@ class MemberDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         member = self.get_object()
-        context['member_detail'] = context.get('member')
-
-        # Get today's date
         today = timezone.now().date()
-
-        # Filter the member's meal logs and exercise logs by today's date
         meal_logs_today = member.meallogs.filter(date=today)
         exercise_logs_today = member.exerciselogs.filter(date=today)
 
-        # Calculate the total calories from today's meals and exercises
-        total_calories_from_meals = sum(log.meal_foods.all().aggregate(
-            total_calories=models.Sum(models.F('food__calories_per_serving') * models.F('quantity'),
-                                      output_field=models.IntegerField()))['total_calories'] for log in meal_logs_today)
+        total_protein = total_carbs = total_fat = total_calories_from_meals = 0
+        for log in meal_logs_today:
+            for mealfood in log.mealfoods.all():
+                total_protein += mealfood.food.protein_grams * float(mealfood.quantity)
+                total_carbs += mealfood.food.carbohydrates_grams * float(mealfood.quantity)
+                total_fat += mealfood.food.fat_grams * float(mealfood.quantity)
+                total_calories_from_meals += mealfood.food.calories_per_serving * float(mealfood.quantity)
+
         total_calories_burned_from_exercises = sum(
             log.exercise.calories_burned_per_minute * log.duration for log in exercise_logs_today)
 
-        # Calculate net calories
-        net_calories = total_calories_from_meals - total_calories_burned_from_exercises
+        net_calories = Decimal(total_calories_from_meals) - total_calories_burned_from_exercises
+        daily_macro_goal_today = DailyMacroGoal.objects.filter(member=member, date=today).first()
+
+        if daily_macro_goal_today:
+            net_protein = total_protein - daily_macro_goal_today.protein_goal
+            net_carbs = total_carbs - daily_macro_goal_today.carbohydrate_goal
+            net_fat = total_fat - daily_macro_goal_today.fat_goal
+        else:
+            net_protein = total_protein
+            net_carbs = total_carbs
+            net_fat = total_fat
 
         # Update the context
+        context['member_detail'] = member
         context['caloriegoals'] = member.caloriegoals.all()
         context['meallogs'] = member.meallogs.all()
         context['exerciselogs'] = member.exerciselogs.all()
+        context['total_protein'] = total_protein
+        context['total_carbs'] = total_carbs
+        context['total_fat'] = total_fat
         context['total_calories_from_meals_today'] = total_calories_from_meals
         context['total_calories_burned_from_exercises_today'] = total_calories_burned_from_exercises
         context['net_calories'] = net_calories
+        context['net_protein'] = net_protein
+        context['net_carbs'] = net_carbs
+        context['net_fat'] = net_fat
 
         return context
 
@@ -79,6 +94,7 @@ class MemberCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 class MemberUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MemberForm
     model = Member
+    template_name = 'calorie_counter/member_form_update.html'
     permission_required = 'calorie_counter.change_member'
 
 
@@ -132,6 +148,7 @@ class DailyMacroGoalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateVi
 class DailyMacroGoalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = DailyMacroGoal
     form_class = DailyMacroGoalForm
+    template_name = 'calorie_counter/dailymacrogoal_form_update.html'
     context_object_name = 'dailymacrogoal'
     permission_required = 'calorie_counter.change_dailymacrogoal'
 
@@ -175,6 +192,7 @@ class FoodCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 class FoodUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = FoodForm
     model = Food
+    template_name = 'calorie_counter/food_form_update.html'
     permission_required = 'calorie_counter.change_food'
 
 
@@ -228,6 +246,7 @@ class MealFoodCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 class MealFoodUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MealFoodForm
     model = MealFood
+    template_name = 'calorie_counter/mealfood_form_update.html'
     permission_required = 'calorie_counter.change_mealfood'
 
 
@@ -257,7 +276,13 @@ class MealLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['meallog_detail'] = context.get('meallog')
+        meallog = self.object
+        total_calories = sum(
+            mealfood.food.calories_per_serving * float(mealfood.quantity) for mealfood in meallog.mealfoods.all())
+
+        context['meallog_detail'] = meallog
+        context['total_calories'] = total_calories
+
         return context
 
 
@@ -270,6 +295,7 @@ class MealLogCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 class MealLogUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MealLogForm
     model = MealLog
+    template_name = 'calorie_counter/meallog_form_update.html'
     permission_required = 'calorie_counter.change_meallog'
 
 
@@ -321,6 +347,7 @@ class ExerciseCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
 class ExerciseUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = ExerciseForm
     model = Exercise
+    template_name = 'calorie_counter/exercise_form_update.html'
     permission_required = 'calorie_counter.change_exercise'
 
 
@@ -357,8 +384,18 @@ class ExerciseLogList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
 
 class ExerciseLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = ExerciseLog
-    context_object_name = 'exerciselog_detail'
     permission_required = 'calorie_counter.view_exerciselog'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        exerciselog = self.object
+
+        total_calories_burned = exerciselog.exercise.calories_burned_per_minute * float(exerciselog.duration)
+
+        context['exerciselog_detail'] = exerciselog
+        context['total_calories_burned'] = total_calories_burned
+
+        return context
 
 
 class ExerciseLogCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -370,6 +407,7 @@ class ExerciseLogCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
 class ExerciseLogUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = ExerciseLogForm
     model = ExerciseLog
+    template_name = 'calorie_counter/exerciselog_form_update.html'
     permission_required = 'calorie_counter.change_exerciselog'
 
 
@@ -400,6 +438,7 @@ class CalorieGoalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView)
 class CalorieGoalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = CalorieGoalForm
     model = CalorieGoal
+    template_name = 'calorie_counter/caloriegoal_form_update.html'
     permission_required = 'calorie_counter.change_caloriegoal'
 
 
