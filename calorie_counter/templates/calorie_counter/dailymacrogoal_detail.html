@@ -9,14 +9,18 @@
 
     <h2> {{ dailymacrogoal_detail }}</h2>
     <ul class="ezu-button-list">
+        {% if perms.calorie_counter.change_dailymacrogoal%}
         <li>
             <a href="{{ dailymacrogoal_detail.get_update_url }}"
       class="button button-primary"> Edit Daily Macro Goal</a>
         </li>
+        {% endif %}
+        {% if perms.calorie_counter.delete_dailymacrogoal %}
         <li>
             <a href="{{ dailymacrogoal_detail.get_delete_url }}"
       class="button button-primary"> Delete Daily Macro Goal</a>
         </li>
+        {% endif %}
     </ul>
 
     <section>

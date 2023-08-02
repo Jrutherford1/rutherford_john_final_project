@@ -8,12 +8,16 @@
     <h2>Member Detail for: {{ member_detail.first_name }} {{ member_detail.last_name }}</h2>
     <ul class="ezu-button-list">
         <li>
+            {% if perms.calorie_counter.change_member%}
             <a href="{{ member_detail.get_update_url }}"
       class="button button-primary"> Edit Member</a>
+            {% endif %}
         </li>
         <li>
+            {% if perms.calorie_counter.delete_member%}
             <a href="{{ member_detail.get_delete_url }}"
       class="button button-primary"> Delete Member</a>
+            {% endif %}
         </li>
     </ul>
 

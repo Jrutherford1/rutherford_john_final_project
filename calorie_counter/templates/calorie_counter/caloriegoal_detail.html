@@ -8,13 +8,13 @@
     <h2>Calorie Goal Detail For - {{ caloriegoal_detail.member }}</h2>
 
     <ul class="ezu-button-list">
-        {% if perms.calorie_counter.change_member %}
+        {% if perms.calorie_counter.change_caloriegoal %}
         <li>
             <a href="{{ caloriegoal_detail.get_update_url }}"
       class="button button-primary"> Update Calorie Goal</a>
         </li>
         {% endif %}
-        {%  if perms.calorie_counter.delete_member %}
+        {%  if perms.calorie_counter.delete_caloriegoal %}
         <li>
             <a href="{{ caloriegoal_detail.get_delete_url }}"
       class="button button-primary"> Delete Calorie Goal</a>

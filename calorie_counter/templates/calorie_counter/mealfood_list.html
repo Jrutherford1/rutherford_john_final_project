@@ -9,8 +9,10 @@
     <h2> Meal Food List </h2>
 
     <div>
+    {% if perms.calorie_counter.add_mealfood%}
         <a href="{% url 'calorie_counter_mealfood_create_urlpattern' %}"
       class="button button-primary"> Add a new meal food </a>
+    {% endif %}
     </div>
     <ul>
         {% for mealfood in mealfood_list %}

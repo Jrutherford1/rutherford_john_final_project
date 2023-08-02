@@ -1,6 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views import View
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.db import models
@@ -36,7 +35,6 @@ class MemberList(LoginRequiredMixin, PermissionRequiredMixin, PageLinksMixin, Li
 
 class MemberDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Member
-    template_name = 'calorie_counter/member_detail.html'
     permission_required = 'calorie_counter.view_member'
 
     def get_context_data(self, **kwargs):
@@ -75,14 +73,12 @@ class MemberDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 class MemberCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = MemberForm
     model = Member
-    template_name = 'calorie_counter/member_form.html'
     permission_required = 'calorie_counter.add_member'
 
 
 class MemberUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MemberForm
     model = Member
-    template_name = 'calorie_counter/member_form_update.html'
     permission_required = 'calorie_counter.change_member'
 
 
@@ -117,14 +113,12 @@ class MemberDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class DailyMacroGoalList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = DailyMacroGoal
-    template_name = 'calorie_counter/dailymacrogoal_list.html'
     context_object_name = 'dailymacrogoal_list'
     permission_required = 'calorie_counter.view_dailymacrogoal'
 
 
 class DailyMacroGoalDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = DailyMacroGoal
-    template_name = 'calorie_counter/dailymacrogoal_detail.html'
     context_object_name = 'dailymacrogoal_detail'
     permission_required = 'calorie_counter.view_dailymacrogoal'
 
@@ -132,15 +126,12 @@ class DailyMacroGoalDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailVi
 class DailyMacroGoalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = DailyMacroGoalForm
     model = DailyMacroGoal
-    template_name = 'calorie_counter/dailymacrogoal_form.html'
     permission_required = 'calorie_counter.add_dailymacrogoal'
-
 
 
 class DailyMacroGoalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = DailyMacroGoal
     form_class = DailyMacroGoalForm
-    template_name = 'calorie_counter/dailymacrogoal_form_update.html'
     context_object_name = 'dailymacrogoal'
     permission_required = 'calorie_counter.change_dailymacrogoal'
 
@@ -167,7 +158,6 @@ class FoodList(LoginRequiredMixin, PermissionRequiredMixin, PageLinksMixin, List
 
 class FoodDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Food
-    template_name = 'calorie_counter/food_detail.html'
     permission_required = 'calorie_counter.view_food'
 
     def get_context_data(self, **kwargs):
@@ -179,14 +169,12 @@ class FoodDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 class FoodCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = FoodForm
     model = Food
-    template_name = 'calorie_counter/food_form.html'
     permission_required = 'calorie_counter.add_food'
 
 
 class FoodUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = FoodForm
     model = Food
-    template_name = 'calorie_counter/food_form_update.html'
     permission_required = 'calorie_counter.change_food'
 
 
@@ -217,14 +205,12 @@ class FoodDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class MealFoodList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = MealFood
-    template_name = 'calorie_counter/mealfood_list.html'
     context_object_name = 'mealfood_list'
     permission_required = 'calorie_counter.view_mealfood'
 
 
 class MealFoodDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = MealFood
-    template_name = 'calorie_counter/mealfood_detail.html'
     permission_required = 'calorie_counter.view_mealfood'
 
     def get_context_data(self, **kwargs):
@@ -236,14 +222,12 @@ class MealFoodDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 class MealFoodCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = MealFoodForm
     model = MealFood
-    template_name = 'calorie_counter/mealfood_form.html'
     permission_required = 'calorie_counter.add_mealfood'
 
 
 class MealFoodUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MealFoodForm
     model = MealFood
-    template_name = 'calorie_counter/mealfood_form_update.html'
     permission_required = 'calorie_counter.change_mealfood'
 
 
@@ -263,14 +247,12 @@ class MealFoodDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class MealLogList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = MealLog
-    template_name = 'calorie_counter/meallog_list.html'
     context_object_name = 'meallog_list'
     permission_required = 'calorie_counter.view_meallog'
 
 
 class MealLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = MealLog
-    template_name = 'calorie_counter/meallog_detail.html'
     permission_required = 'calorie_counter.view_meallog'
 
     def get_context_data(self, **kwargs):
@@ -282,14 +264,12 @@ class MealLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 class MealLogCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = MealLogForm
     model = MealLog
-    template_name = 'calorie_counter/meallog_form.html'
     permission_required = 'calorie_counter.add_meallog'
 
 
 class MealLogUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = MealLogForm
     model = MealLog
-    template_name = 'calorie_counter/meallog_form_update.html'
     permission_required = 'calorie_counter.change_meallog'
 
 
@@ -300,7 +280,7 @@ class MealLogDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
     def get(self, request, pk):
         meallog = self.get_object()
-        mealfoods = meallog.meal_foods.all()
+        mealfoods = meallog.mealfoods.all()
 
         if mealfoods.count() > 0:
             return render(
@@ -323,13 +303,11 @@ class MealLogDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class ExerciseList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Exercise
-    template_name = 'calorie_counter/exercise_list.html'
     permission_required = 'calorie_counter.view_exercise'
 
 
 class ExerciseDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Exercise
-    template_name = 'calorie_counter/exercise_detail.html'
     context_object_name = 'exercise_detail'
     permission_required = 'calorie_counter.view_exercise'
 
@@ -337,14 +315,12 @@ class ExerciseDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
 class ExerciseCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = ExerciseForm
     model = Exercise
-    template_name = 'calorie_counter/exercise_form.html'
     permission_required = 'calorie_counter.add_exercise'
 
 
 class ExerciseUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = ExerciseForm
     model = Exercise
-    template_name = 'calorie_counter/exercise_form_update.html'
     permission_required = 'calorie_counter.change_exercise'
 
 
@@ -375,14 +351,12 @@ class ExerciseDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 
 class ExerciseLogList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = ExerciseLog
-    template_name = 'calorie_counter/exerciselog_list.html'
     context_object_name = 'exerciselog_list'
     permission_required = 'calorie_counter.view_exerciselog'
 
 
 class ExerciseLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = ExerciseLog
-    template_name = 'calorie_counter/exerciselog_detail.html'
     context_object_name = 'exerciselog_detail'
     permission_required = 'calorie_counter.view_exerciselog'
 
@@ -390,34 +364,29 @@ class ExerciseLogDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView)
 class ExerciseLogCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = ExerciseLogForm
     model = ExerciseLog
-    template_name = 'calorie_counter/exerciselog_form.html'
     permission_required = 'calorie_counter.add_exerciselog'
 
 
 class ExerciseLogUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = ExerciseLogForm
     model = ExerciseLog
-    template_name = 'calorie_counter/exerciselog_form_update.html'
     permission_required = 'calorie_counter.change_exerciselog'
 
 
 class ExerciseLogDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = ExerciseLog
-    template_name = 'calorie_counter/exerciselog_confirm_delete.html'
     success_url = reverse_lazy('calorie_counter_exerciselog_list_urlpattern')
     permission_required = 'calorie_counter.delete_exerciselog'
 
 
 class CalorieGoalList(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = CalorieGoal
-    template_name = 'calorie_counter/caloriegoal_list.html'
     context_object_name = 'caloriegoal_list'
     permission_required = 'calorie_counter.view_caloriegoal'
 
 
 class CalorieGoalDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = CalorieGoal
-    template_name = 'calorie_counter/caloriegoal_detail.html'
     context_object_name = 'caloriegoal_detail'
     permission_required = 'calorie_counter.view_caloriegoal'
 
@@ -425,19 +394,16 @@ class CalorieGoalDetail(LoginRequiredMixin, PermissionRequiredMixin, DetailView)
 class CalorieGoalCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = CalorieGoalForm
     model = CalorieGoal
-    template_name = 'calorie_counter/caloriegoal_form.html'
     permission_required = 'calorie_counter.add_caloriegoal'
 
 
 class CalorieGoalUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = CalorieGoalForm
     model = CalorieGoal
-    template_name = 'calorie_counter/caloriegoal_form_update.html'
     permission_required = 'calorie_counter.change_caloriegoal'
 
 
 class CalorieGoalDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = CalorieGoal
-    template_name = 'calorie_counter/caloriegoal_confirm_delete.html'
     success_url = reverse_lazy('calorie_counter_caloriegoal_list_urlpattern')
     permission_required = 'calorie_counter.delete_caloriegoal'

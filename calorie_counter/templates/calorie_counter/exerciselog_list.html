@@ -9,8 +9,10 @@
     <h2> Exercise Log List </h2>
 
     <div>
+    {% if perms.calorie_counter.add_exerciselog%}
         <a href="{% url 'calorie_counter_exerciselog_create_urlpattern' %}"
       class="button button-primary"> Add a new exercise log </a>
+    {% endif %}
     </div>
     <ul>
         {% for exercise in exerciselog_list %}

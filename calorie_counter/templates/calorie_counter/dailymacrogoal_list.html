@@ -9,8 +9,10 @@
     <h2> Daily Macro Goal List </h2>
 
     <div>
+    {% if perms.calorie_counter.add_dailymacrogoal%}
         <a href="{% url 'calorie_counter_dailymacrogoal_create_urlpattern' %}"
       class="button button-primary"> Add a new daily macro goal </a>
+    {% endif %}
     </div>
     <ul>
         {% for dailymacrogoal in dailymacrogoal_list %}

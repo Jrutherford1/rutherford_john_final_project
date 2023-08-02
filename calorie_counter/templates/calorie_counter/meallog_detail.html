@@ -7,14 +7,18 @@
 {% block content %}
     <h2>Meal Log Detail for: {{ meallog_detail }}</h2>
     <ul class="ezu-button-list">
+    {% if perms.calorie_counter.change_meallog%}
         <li>
             <a href="{{ meallog_detail.get_update_url }}"
       class="button button-primary"> Edit Meal Log</a>
         </li>
+    {% endif %}
+    {% if perms.calorie_counter.delete_meallog%}
         <li>
             <a href="{{ meallog_detail.get_delete_url }}"
       class="button button-primary"> Delete Meal Log</a>
         </li>
+    {% endif %}
     </ul>
 
     <section>

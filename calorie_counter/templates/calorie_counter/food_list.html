@@ -7,11 +7,13 @@
 
 {%  block content %}
     <h2> Food List </h2>
-
+    {% if perms.courseinfo.add_course %}
     <div>
+
         <a href="{% url 'calorie_counter_food_create_urlpattern' %}"
       class="button button-primary"> Add a new food</a>
     </div>
+    {% endif %}
     <ul>
         {% for food in food_list %}
             <li>
