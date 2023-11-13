@@ -1,5 +1,4 @@
 from django import forms
-
 from calorie_counter.models import Member
 from calorie_counter.models import DailyMacroGoal
 from calorie_counter.models import Food
@@ -77,7 +76,7 @@ class MealFoodForm(forms.ModelForm):
         fields = '__all__'
 
         def clean_meal_log(self):
-            return self.cleaned_data['meal_log'].strip()
+            return self.cleaned_data['dmeallog'].strip()
 
         def clean_food(self):
             return self.cleaned_data['food'].strip()

@@ -10,11 +10,11 @@
         <p>
             You may not delete food{{ food }}.  This
             food is currently assigned to the following
-            sections:
+            meal foods:
         </p>
     <h4>Meal Food</h4>
         <ul>
-            {% for food in meal_foods %}
+            {% for food in mealfoods %}
             <li><a href="{{ food.get_absolute_url }}">{{ food }}</a></li>
             {% endfor %}
         </ul>

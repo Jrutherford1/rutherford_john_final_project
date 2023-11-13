@@ -13,8 +13,8 @@
 
         <h4>Related Exercise Logs:</h4>
         <ul>
-            {% for exercise_log in exercise_logs %}
-            <li><a href="{{ exercise_log.get_absolute_url }}">{{ exercise_log }}</a></li>
+            {% for exerciselog in exerciselogs %}
+            <li><a href="{{ exerciselog.get_absolute_url }}">{{ exerciselog }}</a></li>
             {% endfor %}
         </ul>
 

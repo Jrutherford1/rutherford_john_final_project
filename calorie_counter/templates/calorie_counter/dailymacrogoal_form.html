@@ -1,0 +1,16 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Create Daily Macro Goal
+{% endblock %}
+
+{% block content %}
+    <h2>Create Daily Macro Goal</h2>
+    <form
+        action="{% url 'calorie_counter_dailymacrogoal_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Daily Macro Goal</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Meal Log Detail
+{% endblock %}
+
+{% block content %}
+    <h2>Meal Log Detail for: {{ meallog_detail }}</h2>
+    <ul class="ezu-button-list">
+    {% if perms.calorie_counter.change_meallog%}
+        <li>
+            <a href="{{ meallog_detail.get_update_url }}"
+      class="button button-primary"> Edit Meal Log</a>
+        </li>
+    {% endif %}
+    {% if perms.calorie_counter.delete_meallog%}
+        <li>
+            <a href="{{ meallog_detail.get_delete_url }}"
+      class="button button-primary"> Delete Meal Log</a>
+        </li>
+    {% endif %}
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Meal Type:</th>
+                <td>{{ meallog_detail.meal_type }}</td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td>{{ meallog_detail.date }}</td>
+            </tr>
+            <tr>
+                <th>Time:</th>
+                <td>{{ meallog_detail.time }}</td>
+            </tr>
+
+        </table>
+
+    <h4>Meal Foods</h4>
+<table>
+    <tr>
+        <th>Food</th>
+        <th>Quantity</th>
+        <th>Calories</th>
+    </tr>
+    {% for mealfood in meallog_detail.mealfoods.all %}
+    <tr>
+        <td><a href="{{ mealfood.food.get_absolute_url }}">{{ mealfood.food.name }}</a></td>
+        <td>{{ mealfood.quantity }}</td>
+        <td>{{ mealfood.food.calories_per_serving }}</td>
+    </tr>
+
+
+    {% empty %}
+    <tr>
+        <td colspan="2">No foods associated with this meal log.</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h4>Total Calories: {{ total_calories }}</h4>
+
+{% endblock %}

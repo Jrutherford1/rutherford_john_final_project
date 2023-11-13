@@ -1,0 +1,26 @@
+{%  extends 'calorie_counter/base.html' %}
+<html lang="en">
+
+{%  block title %}
+    Calorie Goal List
+{%  endblock %}
+
+{%  block content %}
+    <h2> Calorie Goal List </h2>
+
+    <div>
+        {%  if perms.calorie_counter.add_caloriegoal %}
+        <a href="{% url 'calorie_counter_caloriegoal_create_urlpattern' %}"
+      class="button button-primary"> Add a new calorie goal</a>
+        {%  endif %}
+    </div>
+    <ul>
+        {% for caloriegoal in caloriegoal_list %}
+            <li>
+                <a href="{{ caloriegoal.get_absolute_url }}"> {{ caloriegoal }} </a>
+            </li>
+        {%  empty   %}
+            <li><em>There are currently no calorie goals.</em></li>
+        {% endfor %}
+    </ul>
+{%  endblock %}

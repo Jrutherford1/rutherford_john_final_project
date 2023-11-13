@@ -1,0 +1,20 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Delete Meal Food
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ mealfood.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            meal food {{ mealfood }}?
+        </p>
+        <a href="{{ mealfood.get_absolute_url }}">Cancel</a>
+        <button type="submit" class="button button-primary">Delete Meal Food</button>
+    </form>
+{% endblock %}
+>

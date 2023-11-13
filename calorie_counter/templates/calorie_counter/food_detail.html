@@ -7,14 +7,18 @@
 {% block content %}
     <h2>Food Detail for: {{ food_detail.name }}</h2>
     <ul class="ezu-button-list">
+    {% if perms.calorie_counter.change_foodl%}
         <li>
             <a href="{{ food_detail.get_update_url }}"
       class="button button-primary"> Edit Food</a>
         </li>
+    {% endif %}
+    {% if perms.calorie_counter.delete_food%}
         <li>
             <a href="{{ food_detail.get_delete_url }}"
       class="button button-primary"> Delete Food</a>
         </li>
+    {% endif %}
     </ul>
 
     <section>

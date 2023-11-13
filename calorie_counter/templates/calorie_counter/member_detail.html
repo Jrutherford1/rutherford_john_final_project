@@ -8,12 +8,16 @@
     <h2>Member Detail for: {{ member_detail.first_name }} {{ member_detail.last_name }}</h2>
     <ul class="ezu-button-list">
         <li>
+            {% if perms.calorie_counter.change_member%}
             <a href="{{ member_detail.get_update_url }}"
       class="button button-primary"> Edit Member</a>
+            {% endif %}
         </li>
         <li>
+            {% if perms.calorie_counter.delete_member%}
             <a href="{{ member_detail.get_delete_url }}"
       class="button button-primary"> Delete Member</a>
+            {% endif %}
         </li>
     </ul>
 
@@ -53,27 +57,36 @@
         </table>
     </section>
 
-<h5>NET CALORIES TODAY: {{ net_calories }}</h5>
+
+<h5>Calories Eaten: {{ total_calories_from_meals_today }}</h5>
+<h5>Calories Burned: {{ total_calories_burned_from_exercises_today }}</h5>
+<h5>Net CALORIES TODAY: {{ net_calories }}</h5>
+<h6>Total Protein: {{ total_protein }} grams</h6>
+    <h6>Net Protein: {{ net_protein }} grams</h6>
+<h6>Total Carbs: {{ total_carbs }} grams</h6>
+    <h6>Net Carbs: {{ net_carbs }} grams</h6>
+<h6>Total Fat: {{ total_fat }} grams</h6>
+    <h6>Net Fat: {{ net_fat }}</h6>
 
 
 <h5>Calorie Goals</h5>
 
 <ul>
-    {% for goal in calorie_goals %}
+    {% for goal in caloriegoals %}
     <li><a href="{{ goal.get_absolute_url }}">{{ goal }}</a></li>
     {% endfor %}
 </ul>
 
 <h5>Meal Logs</h5>
 <ul>
-    {% for log in meal_logs %}
+    {% for log in meallogs %}
     <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
     {% endfor %}
 </ul>
 
 <h5>Exercise Logs</h5>
 <ul>
-    {% for log in exercise_logs %}
+    {% for log in exerciselogs %}
     <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
     {% endfor %}
 </ul>
