@@ -1,0 +1,16 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Update Meal Log
+{% endblock %}
+
+{% block content %}
+    <h2>Update Meal Log</h2>
+    <form
+        action="{{ meal_log.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Meal Log</button>
+    </form>
+{% endblock %}

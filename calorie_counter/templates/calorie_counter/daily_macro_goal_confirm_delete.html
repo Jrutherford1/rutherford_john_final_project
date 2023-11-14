@@ -1,0 +1,19 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Delete Daily Macro Goal
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ daily_macro_goal.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            daily macro goal {{ daily_macro_goal }}?
+        </p>
+        <a href="{{ daily_macro_goal.get_absolute_url }}">Cancel</a>
+        <button type="submit" class="button button-primary">Delete Daily Macro Goal</button>
+    </form>
+{% endblock %}

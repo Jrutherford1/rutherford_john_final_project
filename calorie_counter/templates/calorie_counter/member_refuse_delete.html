@@ -13,21 +13,21 @@
         </p>
         <h4>Calorie Goals</h4>
         <ul>
-            {% for goal in caloriegoals %}
+            {% for goal in calorie_goals %}
             <li><a href="{{ goal.get_absolute_url }}">{{ goal }}</a></li>
             {% endfor %}
         </ul>
 
         <h4>Meal Logs</h4>
         <ul>
-            {% for log in meallogs %}
+            {% for log in meal_logs %}
             <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
             {% endfor %}
         </ul>
 
         <h4>Exercise Logs</h4>
         <ul>
-            {% for log in exerciselogs %}
+            {% for log in exercise_logs %}
             <li><a href="{{ log.get_absolute_url }}">{{ log }}</a></li>
             {% endfor %}
         </ul>

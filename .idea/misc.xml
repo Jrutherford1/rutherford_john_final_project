@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Black">
-    <option name="executionMode" value="BINARY" />
-    <option name="pathToExecutable" value="$USER_HOME$/opt/anaconda3/bin/black" />
-    <option name="sdkName" value="e4_trainor_django_course" />
-  </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="e4_trainor_django_course" project-jdk-type="Python SDK" />
 </project>

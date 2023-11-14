@@ -1,0 +1,25 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Error Deleting Meal Log
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Meal Log </h2>
+        <p>
+            You may not delete meal log {{ meal_log }} because it has the following meal foods:
+        </p>
+
+        <h4>Related Meal Foods:</h4>
+        <ul>
+            {% for meal_food in meal_foods %}
+            <li><a href="{{ meal_food.get_absolute_url }}">{{ meal_food }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'calorie_counter_meal_log_list_urlpattern' %}">Meal Log List</a>.
+        </p>
+    </div>
+{% endblock %}

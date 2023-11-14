@@ -1,0 +1,42 @@
+>{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+   Daily Macro Goal Detail
+{% endblock %}
+
+
+{% block content %}
+
+    <h2> {{ daily_macro_goal_detail }}</h2>
+    <ul class="ezu-button-list">
+        <li>
+            <a href="{{ daily_macro_goal_detail.get_update_url }}"
+      class="button button-primary"> Edit Daily Macro Goal</a>
+        </li>
+        <li>
+            <a href="{{ daily_macro_goal_detail.get_delete_url }}"
+      class="button button-primary"> Delete Daily Macro Goal</a>
+        </li>
+    </ul>
+
+    <section>
+        <table>
+            <tr>
+                <th>Carbohydrate (gram):</th>
+                <td>{{ daily_macro_goal_detail.carbohydrate_goal }}</td>
+            </tr>
+            <tr>
+                <th>Protein (gram):</th>
+                <td>{{ daily_macro_goal_detail.protein_goal}}</td>
+            </tr>
+            <tr>
+                <th>Fat (gram):</th>
+                <td>{{ daily_macro_goal_detail.fat_goal}}</td>
+            </tr>
+
+        </table>
+    </section>
+
+
+
+{% endblock %}

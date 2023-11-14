@@ -27,22 +27,23 @@ urlpatterns = [
 
     path('',
          RedirectView.as_view(
-            pattern_name='about_urlpattern',
-            permanent=False
+                pattern_name='about_urlpattern',
+                permanent=False
          )),
 
     path("login/",
          LoginView.as_view(template_name='calorie_counter/login.html'),
          name="login_urlpattern"
-         ),
+        ),
 
     path("logout/",
-         LogoutView.as_view(),
-         name="logout_urlpattern"
-         ),
+        LogoutView.as_view(),
+        name="logout_urlpattern"
+        ),
 
     path('about/',
-         TemplateView.as_view(template_name='calorie_counter/about.html'),
-         name='about_urlpattern'
+            TemplateView.as_view(
+                template_name='calorie_counter/about.html'),
+                name='about_urlpattern'
          ),
 ]

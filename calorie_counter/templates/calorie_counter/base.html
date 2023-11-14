@@ -53,9 +53,9 @@
                     Members</a></li>
             {% endif %}
 
-            {%  if perms.calorie_counter.view_dailymacrogoal %}
+            {%  if perms.calorie_counter.view_daily_macro_goal %}
             <li>
-                <a href="{% url 'calorie_counter_dailymacrogoal_list_urlpattern' %}">
+                <a href="{% url 'calorie_counter_daily_macro_goal_list_urlpattern' %}">
                     Macro Goals</a></li>
             {% endif %}
             {%  if perms.calorie_counter.view_food %}
@@ -65,12 +65,12 @@
             {% endif %}
             {%  if perms.calorie_counter.view_mealfood %}
             <li>
-                <a href="{% url 'calorie_counter_mealfood_list_urlpattern' %}">
+                <a href="{% url 'calorie_counter_meal_food_list_urlpattern' %}">
                     Meal Foods</a></li>
             {% endif %}
             {%  if perms.calorie_counter.view_meallog %}
             <li>
-                <a href="{% url 'calorie_counter_meallog_list_urlpattern' %}">
+                <a href="{% url 'calorie_counter_meal_log_list_urlpattern' %}">
                     Meal Logs</a></li>
             {% endif %}
             {%  if perms.calorie_counter.view_exercise %}
@@ -80,19 +80,19 @@
             {% endif %}
             {%  if perms.calorie_counter.view_exerciselog %}
             <li>
-                <a href="{% url 'calorie_counter_exerciselog_list_urlpattern' %}">
+                <a href="{% url 'calorie_counter_exercise_log_list_urlpattern' %}">
                     Exercise Logs</a></li>
             {% endif %}
             {%  if perms.calorie_counter.view_caloriegoal %}
             <li>
-                <a href="{% url 'calorie_counter_caloriegoal_list_urlpattern' %}">
+                <a href="{% url 'calorie_counter_calorie_goal_list_urlpattern' %}">
                     Calorie Goals</a></li>
             {% endif %}
-
+            {%  if perms.calorie_counter.view_dailymacrogoal %}
             <li>
                 <a href="{% url 'about_urlpattern' %}">
                     About</a></li>
-
+            {% endif %}
         </ul>
     </nav>
     <main>

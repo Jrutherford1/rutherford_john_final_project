@@ -3,83 +3,84 @@ from itertools import chain
 
 from django.db import migrations
 
-
 def populate_permissions_lists(apps):
     permission_class = apps.get_model('auth', 'Permission')
 
-    # member_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-    #                                                      content_type__model='member')
+    member_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                             content_type__model='member')
 
-    dailymacrogoal_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                                 content_type__model='dailymacrogoal')
+    daily_macro_goal_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                          content_type__model='daily_macro_goal')
 
     food_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                       content_type__model='food')
+                                                                  content_type__model='food')
 
-    mealfood_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                           content_type__model='mealfood')
+    meal_food_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                                  content_type__model='meal_food')
 
-    meallog_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                          content_type__model='meallog')
+    meal_log_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                           content_type__model='meal_log')
 
     exercise_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                           content_type__model='exercise')
+                                                         content_type__model='exercise')
 
-    exerciselog_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                              content_type__model='exerciselog')
+    exercise_log_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                          content_type__model='exercise_log')
 
-    caloriegoal_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                              content_type__model='caloriegoal')
+    calorie_goal_permissions = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                               content_type__model='calorie_goal')
 
     perm_view_member = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                       content_type__model='member',
-                                                       codename='view_member')
+                                                           content_type__model='member',
+                                                           codename='view_member')
 
-    # perm_view_dailymacrogoal = permission_class.objects.filter(content_type__app_label='calorie_counter',
-    #                                                            content_type__model='dailymacrogoal',
-    #                                                            codename='view_dailymacrogoal')
+    perm_view_daily_macro_goal = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                        content_type__model='daily_macro_goal',
+                                                        codename='view_daily_macro_goal')
 
     perm_view_food = permission_class.objects.filter(content_type__app_label='calorie_counter',
-                                                     content_type__model='food',
-                                                     codename='view_food')
+                                                               content_type__model='food',
+                                                               codename='view_food')
 
-    # perm_view_mealfood = permission_class.objects.filter(content_type__app_label='calorie_counter',
-    #                                                      content_type__model='mealfood',
-    #                                                      codename='view_mealfood')
-    #
-    # perm_view_meallog = permission_class.objects.filter(content_type__app_label='calorie_counter',
-    #                                                     content_type__model='meallog',
-    #                                                     codename='view_meallog')
-    #
-    # perm_view_exercise = permission_class.objects.filter(content_type__app_label='calorie_counter',
-    #                                                      content_type__model='exercise',
-    #                                                      codename='view_exercise')
-    #
-    # perm_view_exerciselog = permission_class.objects.filter(content_type__app_label='calorie_counter',
-    #                                                         content_type__model='exerciselog',
-    #                                                         codename='view_exerciselog')
-    #
-    # perm_view_caloriegoal = permission_class.objects.filter(content_type__app_label='calorie_counter',
-    #                                                         content_type__model='caloriegoal',
-    #                                                         codename='view_caloriegoal')
+    perm_view_meal_food = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                               content_type__model='meal_food',
+                                                               codename='view_meal_food')
+
+    perm_view_meal_log = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                         content_type__model='meal_log',
+                                                         codename='view_meal_log')
+
+    perm_view_exercise = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                       content_type__model='exercise',
+                                                       codename='view_exercise')
+
+    perm_view_exercise_log = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                        content_type__model='exercise_log',
+                                                        codename='view_exercise_log')
+
+    perm_view_calorie_goal = permission_class.objects.filter(content_type__app_label='calorie_counter',
+                                                             content_type__model='calorie_goal',
+                                                             codename='view_calorie_goal')
 
     member_permissions = chain(perm_view_member,
-                               dailymacrogoal_permissions,
-                               perm_view_food,
-                               mealfood_permissions,
-                               meallog_permissions,
-                               exercise_permissions,
-                               exerciselog_permissions,
-                               caloriegoal_permissions)
+                            	daily_macro_goal_permissions,
+                                perm_view_food,
+                                meal_food_permissions,
+                                meal_log_permissions,
+                                exercise_permissions,
+                                exercise_log_permissions,
+                                calorie_goal_permissions)
 
     sysadmin_permissions = chain(member_permissions,
-                                 dailymacrogoal_permissions,
-                                 food_permissions,
-                                 mealfood_permissions,
-                                 meallog_permissions,
-                                 exercise_permissions,
-                                 exerciselog_permissions,
-                                 caloriegoal_permissions)
+                                     daily_macro_goal_permissions,
+                                     food_permissions,
+                                     meal_food_permissions,
+                                     meal_log_permissions,
+                                     exercise_permissions,
+                                     exercise_log_permissions,
+                                     calorie_goal_permissions)
+
+
 
     my_groups_initialization_list = [
         {

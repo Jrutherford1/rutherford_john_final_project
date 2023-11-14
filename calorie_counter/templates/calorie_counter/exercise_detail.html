@@ -7,18 +7,14 @@
 {% block content %}
     <h2>Exercise Detail - {{ exercise_detail.exercise_type }}</h2>
     <ul class="ezu-button-list">
-    {% if perms.calorie_counter.change_exercise%}
         <li>
             <a href="{{ exercise_detail.get_update_url }}"
       class="button button-primary"> Edit Exercise</a>
         </li>
-    {% endif %}
-    {% if perms.calorie_counter.delete_exercise%}
         <li>
             <a href="{{ exercise_detail.get_delete_url }}"
       class="button button-primary"> Delete Exercise</a>
         </li>
-    {% endif %}
     </ul>
 
     <section>

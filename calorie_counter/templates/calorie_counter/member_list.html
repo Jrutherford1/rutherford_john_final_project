@@ -8,10 +8,8 @@ Member List
     <h2> Member List </h2>
 
     <div>
-    {% if perms.calorie_counter.add_member%}
         <a href="{% url 'calorie_counter_member_create_urlpattern' %}"
       class="button button-primary"> Add a new member </a>
-    {% endif %}
     </div>
     <ul>
         {% for member in member_list %}

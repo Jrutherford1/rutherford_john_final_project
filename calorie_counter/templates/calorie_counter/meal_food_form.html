@@ -1,0 +1,16 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Create Meal Food
+{% endblock %}
+
+{% block content %}
+    <h2>Create Meal Food</h2>
+    <form
+        action="{% url 'calorie_counter_meal_food_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Meal Food</button>
+    </form>
+{% endblock %}

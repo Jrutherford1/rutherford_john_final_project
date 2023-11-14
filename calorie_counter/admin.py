@@ -18,3 +18,4 @@ admin.site.register(Exercise)
 admin.site.register(ExerciseLog)
 admin.site.register(CalorieGoal)
 admin.site.register(MealFood)
+

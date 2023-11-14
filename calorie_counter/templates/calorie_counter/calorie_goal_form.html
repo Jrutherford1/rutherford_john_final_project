@@ -1,0 +1,17 @@
+{% extends 'calorie_counter/base.html' %}
+
+{% block title %}
+    Create Calorie Goal
+{% endblock %}
+
+{% block content %}
+    <h2>Create Calorie Goal</h2>
+    <form
+        action="{% url 'calorie_counter_calorie_goal_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Calorie Goal</button>
+    </form>
+{% endblock %}
+
